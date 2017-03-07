@@ -15,17 +15,13 @@ export var keys = Object.assign({},Base.keys,{
         type:Date,                //计划送货日期
         default:Date.now()
     },
-    sellNum:{
-        type:String,                //销售订单号
-        default:''
+    outType:{
+       type:String,                //出库类型
+        default:'' 
     },
-    name:{
-        type:String,                //客户名称
-        default:''
-    },
-    address:{
-        type:String,                //送货地址
-        default:''
+    returnState:{
+       type:String,                //退货状态
+        default:'' 
     },
     note:{
         type:String,
