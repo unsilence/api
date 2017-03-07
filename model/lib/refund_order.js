@@ -19,6 +19,14 @@ export var keys = Object.assign({},Base.keys,{
         type:String,
         default:''                  //备注
     },
+    sellPrice:{
+        type:String,                //产品销售单价
+        default:''  
+    },
+    salesAmount:{
+        type:String,                //产品销售总金额
+        default:''  
+    },
     examine:{
         type:Boolean,
         default:false               //审核，默认未审核

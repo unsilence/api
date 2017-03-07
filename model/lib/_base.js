@@ -13,7 +13,9 @@ export var keys = {
     productName:{type:String,default:''},           //产品名称
     productCount:{type:String,default:''},          //产品数量
     purchasePrice:{type:String,default:''},         //产品采购单价
+    purchaseAmount:{type:String,default:''},        //采购金额（原币）
     rate:{type:String,default:''},                  //计划汇率
+    purchaseTotal:{type:String,default:''},        //产品采购金额（人民币）
     partNum:{type:[String],default:[]},             //部件型号
     partCount:{type:[String],default:[]},           //部件数量
     suitcaseNum:{type:[String],default:[]},         //提箱单号
