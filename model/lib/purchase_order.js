@@ -9,7 +9,7 @@ export var keys = Object.assign({},Base.keys,{
     },
     purchaseName:{
         type:String,
-        default:''                 //采购专员
+        default:''                 //采购专员姓名
     },
     arriveAt:{
         type:String,                //计划到货日期
