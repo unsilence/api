@@ -3,11 +3,11 @@ import _ from 'underscore'
 import * as Base from './_base'
 
 export var keys = Object.assign({},Base.keys,{
-   takegoods_num:{                  
+   takegoodsNum:{                  
        type:String,                 //提货单号
        default:''
     },
-    purchase_name:{
+    purchaseName:{
         type:String,
         default:''                 //采购专员
     },
@@ -27,7 +27,7 @@ export var keys = Object.assign({},Base.keys,{
         type:Boolean,
         default:false               //审核，默认未审核
     },
-    cancel_examine:{
+    cancelExamine:{
         type:Boolean,
         default:false               //取消审核，默认未取消
     },

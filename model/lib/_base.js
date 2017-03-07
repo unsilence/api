@@ -8,7 +8,25 @@ export var keys = {
     qtext:{type:String,default:''},
     valid:{type: Boolean,default:true},
     updateAt:{type:Date,default: Date.now()},
-    createAt:{type:Date,default: Date.now()}
+    createAt:{type:Date,default: Date.now()},
+    productNum:{type:String,default:''},            //产品型号
+    productName:{type:String,default:''},           //产品名称
+    productCount:{type:String,default:''},          //产品数量
+    purchasePrice:{type:String,default:''},         //产品采购单价
+    rate:{type:String,default:''},                  //计划汇率
+    partNum:{type:String,default:''},               //部件型号
+    partCount:{type:String,default:''},             //部件数量
+    suitcaseNum:{type:String,default:''},           //提箱单号
+    boxOrderNum:{type:String,default:''},           //箱单号
+    boxNum:{type:String,default:''},                //箱号
+    boxCount:{type:String,default:''},              //箱数
+    supplierName:{type:String,default:''},          //供应商名称
+    brand:{type:String,default:''},                 //品牌
+    salsemanName:{type:String,default:''},          //销售员姓名
+    sellOrderNum:{type:String,default:''},          //销售订单号
+    customerName:{type:String,default:''},          //客户姓名
+    address:{type:String,default:''},               //客户地址
+    state:{type:String,default:''}                  //货品状态
 }
 export var collectionName = 'test'
 
