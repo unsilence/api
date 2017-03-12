@@ -20,7 +20,13 @@ export var keys = Object.assign({},Base.keys,{
         type: String,
         default: ''
     },
-
+    status:{
+        type: String,
+        enum: [
+            'waitin', 'waitout','out'  //等待入库 等待出库（也是有现货的意思） 已出库
+        ],
+        default: 'waitout'
+    }
     })
 export var PRE = 'ST'
 Base._getThis(exports,keys,__filename)
