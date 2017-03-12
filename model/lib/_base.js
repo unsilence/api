@@ -22,8 +22,22 @@ export var getById = (ithis,_id)=>{
         })
     }).catch(e=>console.log(e))
 }
+
+export var getByNum = (ithis,cnum)=>{
+    console.log("model:: cnum",ithis.collectionName,_id)
+    return new Promise((resolve,reject)=>{
+        let clt = model.getDb().collection(ithis.collectionName+'s')
+        clt.findOne({cnum:cnum,valid:true},function(err,doc){
+            console.log({err,doc})
+            resolve(JSON.parse(JSON.stringify(doc)))
+        })
+    }).catch(e=>console.log(e))
+}
+
+
+
 export var updateById = (ithis,_id,options)=>{
-    console.log("model:: updateById ",ithis.collectionName,_id,options)
+    console.log("model:: updateById ",ithis.collectionName,_id,"1212121212222222",options)
     return new Promise((resolve,reject)=>{
         let clt = model.getDb().collection(ithis.collectionName+'s')
         //ensure column values
@@ -33,6 +47,8 @@ export var updateById = (ithis,_id,options)=>{
             let coltype = ithis.keys[k]
             setmap[k] =typeEnsure(coltype,options[k])
         })
+		console.log('will update',_id)
+		console.dir(setmap)
         clt.findOneAndUpdate({_id:new ObjectID(_id),valid:true},
                             {$set:setmap},
                             {returnOriginal:false},
@@ -47,27 +63,31 @@ let typeEnsure = (tp,v)=>{
     if(_.isFunction(tp['type'])){
         return tp['type'](v||tp['default'])
     }else if(_.isArray(tp['type'])){
-        console.log('enter array',tp)
+        console.log('enter array',{tp,v})
         v = v || []
         return v.map(i=>typeEnsure(tp['type'][0],i))
     }else if(_.isObject(tp['type'])){
-        console.log('enter object',tp)
+        console.log('enter object ',{tp,v})
         let _o={}
         _.keys(tp['type']).map(k=>{
             _o[k] = typeEnsure(tp['type'][k],v[k])
         })
+		console.log('new object',_o)
+		return _o
     }else if(_.isFunction(tp)){
         return tp(v)
     }else if(_.isArray(tp)){
-        console.log('enter array',tp)
+        console.log('enter array 2',{tp,v})
         v = v || []
         return v.map(i=>typeEnsure(tp[0],i))
     }else if(_.isObject(tp)){
-        console.log('enter object',tp)
+        console.log('enter object 2',{tp,v})
         let _o={}
-        _.keys(tp['type']).map(k=>{
+        _.keys(tp).map(k=>{
             _o[k] = typeEnsure(tp[k],v[k])
         })
+		console.log('new object 2',_o)
+		return _o
     }else {
         throw "wrong";
     }
@@ -75,12 +95,11 @@ let typeEnsure = (tp,v)=>{
 export var addItem = (ithis,_id,options)=>{
     console.log("model:: addItem ",ithis.collectionName,options)
     return new Promise((resolve,reject)=>{
-        console.log(ithis)
         let strpre = ithis.PRE + moment().format('YYMMDD')
         let filter = {
             cnum: new RegExp(strpre, 'i')
         }
-        let clt = model.getDb().collection(ithis.collectionName+'s')
+        let clt = model.getDb().collection(ithis.collectionName+'s');
         clt.find(filter,{sort:{_id:-1}}).toArray(function(err,docs){
             let item = {}
             Object.keys(ithis.keys)
@@ -98,7 +117,7 @@ export var addItem = (ithis,_id,options)=>{
             }
             item.cnum = cnum
             item.updateAt = item.createAt = new Date()
-            console.log('insert',{item})
+            console.log('insert---------------------------------',{item})
             clt.insertOne(item,function(err,result){
                                     console.log({err,insertedId:result.insertedId})
                                     clt.findOne({_id:new ObjectID(result.insertedId),valid:true},function(err,doc){

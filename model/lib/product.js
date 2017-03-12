@@ -8,10 +8,14 @@ export var keys = Object.assign({}, Base.keys, {
         type: String,
         default: ''
     },
+    model:{
+        type: String,
+        default: ''
+    },
     componnents: {
         type: [
             {
-                componnent_num: {
+                component_num: {
                     type: String,
                     default: ''
                 },
@@ -22,7 +26,7 @@ export var keys = Object.assign({}, Base.keys, {
             }
         ],
         default: []
-    }
+    },
     pic: {
         type: String,
         default: ''

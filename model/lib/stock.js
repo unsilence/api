@@ -16,7 +16,7 @@ export var keys = Object.assign({},Base.keys,{
         type: String,
         default: ''
     },
-    pic:: {
+    pic: {
         type: String,
         default: ''
     },

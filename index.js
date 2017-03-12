@@ -6,7 +6,7 @@ import model from './model'
 import authMiddle from './auth'
 import fileMiddle from './file'
 
-model.connect('mongodb://localhost:27017/im_test')
+model.connect('mongodb://localhost:27017/im_dev')
 //文件处理
 app.use(fileMiddle)
 //访问权限
