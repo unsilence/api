@@ -8,7 +8,9 @@ export var keys = {
     qtext:{type:String,default:''},
     valid:{type: Boolean,default:true},
     updateAt:{type:Date,default: Date.now()},
-    createAt:{type:Date,default: Date.now()}
+    createAt:{type:Date,default: Date.now()},
+    createByUser:{type:String,default:''},
+    lastModifyByUser:{type:String,default:''}
 }
 export var collectionName = 'test'
 

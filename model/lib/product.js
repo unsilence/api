@@ -12,7 +12,7 @@ export var keys = Object.assign({}, Base.keys, {
         type: String,
         default: ''
     },
-    componnents: {
+    components: {
         type: [
             {
                 component_num: {

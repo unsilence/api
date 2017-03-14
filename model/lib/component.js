@@ -4,7 +4,7 @@ import * as Base from './_base'
 
 //商品的部件 一个商品是多个部件的组合 也可以只有一个部件
 export var keys = Object.assign({}, Base.keys, {
-    supllier_num: {
+    supplierNum: {
         type: String,
         default: ''
     },

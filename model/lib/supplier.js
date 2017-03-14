@@ -13,12 +13,12 @@ export var keys = Object.assign({},Base.keys,{
             type: String,
             default: ''
         },
-        
+
         contract_num: {
             type: String,
             default: ''
         }
 
     })
-export var PRE = 'RC'
+export var PRE = 'SP'
 Base._getThis(exports,keys,__filename)

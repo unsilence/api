@@ -21,17 +21,17 @@ export var keys = Object.assign({},Base.keys,{
         },
          department: {
             type: String,
-            enum: ['²ÆÎñ', '²É¹º1', '²É¹º1','ÎïÁ÷','ÊÛºó'],
+            enum: ['è´¢åŠ¡', 'é‡‡è´­1', 'é‡‡è´­1','ç‰©æµ','å”®å'],
             default: ''
-        },                                                      //ËùÔÚ²¿ÃÅ
+        },                                                      //æ‰€åœ¨éƒ¨é—¨
         itype:{
             type: String,
-             enum: ['Ö÷¹Ü', '×¨Ô±'],
+             enum: ['ä¸»ç®¡', 'ä¸“å‘˜'],
             default: ''
         },
         city:{
             type: String,
-             enum: ['È«¹ú', '±±¾©','Îäºº',' ÉÏº£ ','º¼Öİ'],
+             enum: ['å…¨å›½', 'åŒ—äº¬','æ­¦æ±‰',' ä¸Šæµ· ','æ­å·'],
             default: ''
         },
         note: {
@@ -43,7 +43,7 @@ export var keys = Object.assign({},Base.keys,{
             enum: ['enable', 'disabled'],
             default: 'enable'
         },
-       
+
     })
 export var PRE = 'US'
 Base._getThis(exports,keys,__filename)
