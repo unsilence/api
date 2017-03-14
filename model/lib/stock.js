@@ -12,11 +12,38 @@ export var keys = Object.assign({},Base.keys,{
         type: String,
         default: ''
     },
-    note: {
+    product_supplier:{
         type: String,
         default: ''
     },
-    pic: {
+    product_model:{
+        type: String,
+        default: ''
+    },
+    product_name:{
+        type: String,
+        default: ''
+    },
+    componnents: {
+        type: [
+            {
+                component_num: {
+                    type: String,
+                    default: ''
+                },
+                quantity: {
+                    type: String,
+                    default: ''
+                }
+            }
+        ],
+        default: []
+    },
+    note: { //
+        type: String,
+        default: ''
+    },
+    pic: { // 现货照片
         type: String,
         default: ''
     },

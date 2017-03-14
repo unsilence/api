@@ -3,63 +3,63 @@ import _ from 'underscore'
 import * as Base from './_base'
 
 export var keys = Object.assign({},Base.keys,{
-   takegoodsNum:{                  
-       type:String,                 //Ìá»õµ¥ºÅ
+   takegoodsNum:{
+       type:String,                 //æè´§å•å·
        default:''
     },
     purchaseName:{
         type:String,
-        default:''                 //²É¹º×¨Ô±
+        default:''                 //é‡‡è´­ä¸“å‘˜
     },
     arriveAt:{
-        type:String,                //¼Æ»®µ½»õÈÕÆÚ
+        type:String,                //è®¡åˆ’åˆ°è´§æ—¥æœŸ
         default:''
     },
     currency:{
-        type:String,                //±ÒÖÖ
+        type:String,                //å¸ç§
         default:''
     },
     note:{
         type:String,
-        default:''                  //±¸×¢
+        default:''                  //å¤‡æ³¨
     },
     orderMessage:{type:[{
-        productNum:{type:String,default:''},            //²úÆ·ĞÍºÅ
-        productName:{type:String,default:''},           //²úÆ·Ãû³Æ
-        productCount:{type:String,default:''},          //²úÆ·ÊıÁ¿
-        purchasePrice:{type:String,default:''},         //²úÆ·²É¹ºµ¥¼Û
-        purchaseAmount:{type:String,default:''},        //²É¹º½ğ¶î£¨Ô­±Ò£©
-        rate:{type:String,default:''},                  //¼Æ»®»ãÂÊ
-        purchaseTotal:{type:String,default:''},        //²úÆ·²É¹º½ğ¶î£¨ÈËÃñ±Ò£©
+        productNum:{type:String,default:''},            //äº§å“å‹å·
+        productName:{type:String,default:''},           //äº§å“åç§°
+        productCount:{type:String,default:''},          //äº§å“æ•°é‡
+        purchasePrice:{type:String,default:''},         //äº§å“é‡‡è´­å•ä»·
+        purchaseAmount:{type:String,default:''},        //é‡‡è´­é‡‘é¢ï¼ˆåŸå¸ï¼‰
+        rate:{type:String,default:''},                  //è®¡åˆ’æ±‡ç‡
+        purchaseTotal:{type:String,default:''},        //äº§å“é‡‡è´­é‡‘é¢ï¼ˆäººæ°‘å¸ï¼‰
         part:{type:[{
-            partNum:{type:String,default:''},             //²¿¼şĞÍºÅ
-            partCount:{type:Number,default:0},            //²¿¼şÊıÁ¿
-            suitcaseNum:{type:String,default:''},         //ÌáÏäµ¥ºÅ
-            boxOrderNum:{type:String,default:''},         //Ïäµ¥ºÅ
-            boxNum:{type:String,default:''},              //ÏäºÅ
-            boxCount:{type:Number,default:0}              //ÏäÊı
+            partNum:{type:String,default:''},             //éƒ¨ä»¶å‹å·
+            partCount:{type:Number,default:0},            //éƒ¨ä»¶æ•°é‡
+            suitcaseNum:{type:String,default:''},         //æç®±å•å·
+            boxOrderNum:{type:String,default:''},         //ç®±å•å·
+            boxNum:{type:String,default:''},              //ç®±å·
+            boxCount:{type:Number,default:0}              //ç®±æ•°
         }],default:[]},
-        supplierName:{type:String,default:''},          //¹©Ó¦ÉÌÃû³Æ
-        brand:{type:String,default:''},                 //Æ·ÅÆ
-        salesmanName:{type:String,default:''},          //ÏúÊÛÔ±ĞÕÃû
-        sellOrderNum:{type:String,default:''},          //ÏúÊÛ¶©µ¥ºÅ
-        customerName:{type:String,default:''},          //¿Í»§ĞÕÃû
-        address:{type:String,default:''},               //¿Í»§µØÖ·
-        state:{type:String,default:''}                  //»õÆ·×´Ì¬
+        supplierName:{type:String,default:''},          //ä¾›åº”å•†åç§°
+        brand:{type:String,default:''},                 //å“ç‰Œ
+        salesmanName:{type:String,default:''},          //é”€å”®å‘˜å§“å
+        sellOrderNum:{type:String,default:''},          //é”€å”®è®¢å•å·
+        customerName:{type:String,default:''},          //å®¢æˆ·å§“å
+        address:{type:String,default:''},               //å®¢æˆ·åœ°å€
+        state:{type:String,default:''}                  //è´§å“çŠ¶æ€
     }],default:[]},
     examine:{
         type:Boolean,
-        default:false               //ÉóºË£¬Ä¬ÈÏÎ´ÉóºË
+        default:false               //å®¡æ ¸ï¼Œé»˜è®¤æœªå®¡æ ¸
     },
     cancelExamine:{
         type:Boolean,
-        default:false               //È¡ÏûÉóºË£¬Ä¬ÈÏÎ´È¡Ïû
+        default:false               //å–æ¶ˆå®¡æ ¸ï¼Œé»˜è®¤æœªå–æ¶ˆ
     },
     untread:{
         type:Boolean,
-        default:false               //ÍË»Ø
+        default:false               //é€€å›
     }
-    
-    
+
+
 })
 Base._getThis(exports,keys,__filename)
