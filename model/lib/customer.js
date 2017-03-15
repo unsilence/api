@@ -28,7 +28,7 @@ export var keys = Object.assign({},Base.keys,{
         address: {
             type: String,
             default: ''
-        }
+        },
         channel: {
             type: String,
             default: ''

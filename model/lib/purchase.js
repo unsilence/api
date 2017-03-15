@@ -29,7 +29,7 @@ export var keys = Object.assign({}, Base.keys, {
             'waitAudit', 'waitInput', 'inStock'
         ], //
         default: '' //备注
-    }
+    },
     orderMessage: {
         type: [
             {

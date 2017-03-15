@@ -6,9 +6,13 @@ import model from './model'
 import authMiddle from './auth'
 import fileMiddle from './file'
 
+var body = require('koa-better-body')
+
 model.connect('mongodb://localhost:27017/im_dev')
 //文件处理
+// app.use(body())
 app.use(fileMiddle)
+
 //访问权限
 app.use(authMiddle)
 //特殊接口 ...

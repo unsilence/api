@@ -27,12 +27,50 @@ let _db
 _dict.getDb = ()=>{
     return _db
 }
-let MongoClient = _dict.MongoClient = require('mongodb').MongoClient
+
+const mongo = require('mongodb');
+
+let MongoClient = _dict.MongoClient = mongo.MongoClient
 
 _dict.connect = mstr => {
     MongoClient.connect(mstr,function(err,db){
         _db = db
         console.log('connect ok',mstr,err)
     })
+}
+const Grid = require('gridfs-stream');
+_dict.fileSave = file =>{
+    console.log("model:: fileSave",file)
+    return new Promise((resolve, reject)=>{
+        var gfs = Grid(_db,mongo);
+        let filename = file.filename+'____'+Date.now()
+        var writestream = gfs.createWriteStream({filename:filename});
+        let r = fs.createReadStream(file.path)
+        .pipe(writestream)
+        .on("finish",()=>{
+          console.log('model::fileSave finish')
+          gfs.files.find({filename:filename}).toArray(function (err, files) {
+            console.log({err:err,files:files});
+            if(files.length === 0){
+              console.log("some wrong")
+              reject()
+            }else{
+                resolve(files[0].md5)
+            }
+          })
+        })
+    }).catch(e=>console.log(e))
+}
+_dict.fileRead = strmd5 =>{
+    console.log("model:: fileRead ",strmd5)
+    var gfs = Grid(_db,mongo);
+    let opt ={md5:strmd5}
+    return new Promise((resolve,reject) => {
+        gfs.findOne(opt, function (err, file) {
+            console.log(file)
+          let readstream = gfs.createReadStream({_id:file._id})
+          resolve(readstream)
+        })
+    }).catch(e=>console.log(e))
 }
 export default _dict
