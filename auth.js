@@ -1,20 +1,57 @@
 import model from './model'
 const ACTIONS ={
-    async login(ctx,next){
-        let item = await model.Session.addItem(null,{userName:'ceshi'})
-        ctx.body = {status:'success',data:{item:{name:'ceshi'},token:item._id}}
+    //获得一个会话的token
+    //发送验证码
+    //登录 or 注册
+    //获得该会话人的身份信息 5697083e9ef262abaf7aa7fa58c3e21d
+    async get_token(ctx,next){
+        let item = await model.Session.addItem(null,{data:'{}'})
+        ctx.body = {status:'success',token:item._id}
     },
-    async logout(ctx,next){
-        let item = await model.Session.getById(ctx.req.query.token)
-        ctx.body = {status:'success',data:{item}}
+    async get_code(ctx,next){
+        let item = await model.Session.getById(ctx.query.token)
+        if(item){
+            let code = '1234'
+            let codeCreateAt = Date.now()
+            let {phone} = JSON.parse(ctx.rawBody);
+            let sessionData = Object.assign({},JSON.parse(item.data),{phone,code,codeCreateAt})
+            await model.Session.updateById(item._id,{data:JSON.stringify(sessionData)})
+            ctx.body = {status:'success',msg:'验证码已经发送'}
+        }else{
+            ctx.body = {status:'wrong',msg:'请先用/auth/get_token 获得一个token'}
+        }
+    },
+    async login(ctx,next){
+        console.log("query",ctx.query)
+        let item = await model.Session.getById(ctx.query.token)
+        if(!item)
+            return ctx.body = {status:'wrong',msg:'请先用/auth/get_token 获得一个token'}
+        let {phone,code,password} = JSON.parse(ctx.rawBody);
+        let sessionData = Object.assign({},JSON.parse(item.data))
+        if(phone != sessionData.phone || code != sessionData.code)
+            return ctx.body = {status:'wrong',msg:'验证码错误'}
+        let us = await model.User.fetch({phone});
+        let u;
+        if(us.count > 0){
+            u = us.list[0]
+        }else{
+            u = await model.User.addItem(null,{phone})
+        }
+        sessionData.user=u
+        await model.Session.updateById(item._id,{data:JSON.stringify(sessionData)})
+        ctx.body = {status:'success',data:{item:u,token:item._id}}
     },
     async account(ctx,next){
         console.log("query",ctx.query)
         let item = await model.Session.getById(ctx.query.token)
         if(item)
-            ctx.body = {status:'success',data:{item}}
+            ctx.body = {status:'success',data:{item:JSON.parse(item.data)}}
         else
             ctx.body = {status:'wrong',msg:'请使用/auth/login接口登录'}
+    },
+    async logout(ctx,next){
+        let item = await model.Session.deleteById(ctx.query.token)
+        ctx.body = {status:'success',msg:'退出成功'}
     }
 }
 export default async (ctx, next) => {

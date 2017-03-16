@@ -13,9 +13,7 @@ model.connect('mongodb://localhost:27017/im_dev')
 // app.use(body())
 app.use(fileMiddle)
 
-//访问权限
-app.use(authMiddle)
-//特殊接口 ...
+
 
 app.use(async (ctx, next) => {
     try {
@@ -30,6 +28,9 @@ app.use(async (ctx, next) => {
         ctx.status = err.status || 500;
     }
 })
+//访问权限
+app.use(authMiddle)
+//特殊接口 ...
 
 app.use(async (ctx,next) => {
     let urls = ctx.path.split('/')

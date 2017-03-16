@@ -19,11 +19,21 @@ export var keys = Object.assign({},Base.keys,{
             type: String,
             default: ''
         },
-         department: {
+        department: {
             type: String,
             enum: ['财务', '采购1', '采购1','物流','售后'],
             default: ''
-        },                                                      //所在部门
+        },
+        company:{
+            type: String,
+             enum: ['总部', '北京', '杭州', '武汉',, '上海'],
+            default: ''
+        },
+        job:{ // 工作岗位
+            type: String,
+             enum: ['主管', '专员'],
+            default: ''
+        },                                                     //所在部门
         itype:{
             type: String,
              enum: ['主管', '专员'],
