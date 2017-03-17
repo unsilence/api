@@ -44,10 +44,12 @@ const ACTIONS ={
     async account(ctx,next){
         console.log("query",ctx.query)
         let item = await model.Session.getById(ctx.query.token)
-        if(item)
-            ctx.body = {status:'success',data:{item:JSON.parse(item.data)}}
-        else
+        if(item){
+            let sessionData = Object.assign({},JSON.parse(item.data))
+            ctx.body = {status:'success',data:{item:sessionData.user}}
+        }else{
             ctx.body = {status:'wrong',msg:'请使用/auth/login接口登录'}
+        }
     },
     async logout(ctx,next){
         let item = await model.Session.deleteById(ctx.query.token)

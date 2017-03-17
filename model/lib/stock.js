@@ -47,6 +47,13 @@ export var keys = Object.assign({},Base.keys,{
         type: String,
         default: ''
     },
+    status_sale:{
+        type: String,
+        enum: [
+            'may', 'sold'
+        ],
+        default: 'may'
+    },
     status:{
         type: String,
         enum: [
