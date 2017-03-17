@@ -68,7 +68,15 @@ export default async (ctx, next) => {
             throw new Error('访问地址不存在')
           }
         }else if (true) {//这里要检测 1 是否已登录  2 是否为总部
-            await next()
+            let item = await model.Session.getById(ctx.query.token)
+            if(item){
+                let sessionData = Object.assign({},JSON.parse(item.data))
+                ctx.sessionData = sessionData
+                await next()
+            }else{
+                ctx.body = {status:'wrong',msg:'请使用/auth/login接口登录'}
+            }
+
         }
     } catch (err) {
         console.log(err)

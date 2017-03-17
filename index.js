@@ -40,7 +40,7 @@ app.use(async (ctx,next) => {
     console.log(clt,method,{id,filter,limit,startPos,orderBy})
 
     if((method === 'addItem' || method.endsWith('ById')) && clt in model &&  method in model[clt]){
-        let ret = await model[clt][method](id,item)
+        let ret = await model[clt][method](id,item,ctx)
         ctx.body = {status:'success',msg:'hello world!',data:{item:ret}}
     }else{
         let {list,count} = await model[clt][method](filter,orderBy,limit,startPos)

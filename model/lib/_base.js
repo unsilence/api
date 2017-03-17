@@ -38,7 +38,7 @@ export var getByNum = (ithis,cnum)=>{
 
 
 
-export var updateById = (ithis,_id,options)=>{
+export var updateById = (ithis,_id,options,ctx)=>{
     console.log("model:: updateById ",ithis.collectionName,_id,"1212121212222222",options)
     return new Promise((resolve,reject)=>{
         let clt = model.getDb().collection(ithis.collectionName+'s')
@@ -51,6 +51,7 @@ export var updateById = (ithis,_id,options)=>{
         })
 		console.log('will update',_id)
 		console.dir(setmap)
+        setmap.lastModifyByUser = ctx.sessionData.user.cnum
         clt.findOneAndUpdate({_id:new ObjectID(_id),valid:true},
                             {$set:setmap},
                             {returnOriginal:false},
@@ -94,7 +95,7 @@ let typeEnsure = (tp,v)=>{
         throw "wrong";
     }
 }
-export var addItem = (ithis,_id,options)=>{
+export var addItem = (ithis,_id,options,ctx)=>{
     console.log("model:: addItem ",ithis.collectionName,options)
     return new Promise((resolve,reject)=>{
         let strpre = ithis.PRE + moment().format('YYMMDD')
@@ -119,6 +120,8 @@ export var addItem = (ithis,_id,options)=>{
             }
             item.cnum = cnum
             item.updateAt = item.createAt = new Date()
+            item.createByUser = ctx.sessionData.user.cnum
+            item.lastModifyByUser = ctx.sessionData.user.cnum
             console.log('insert---------------------------------',{item})
             clt.insertOne(item,function(err,result){
                                     console.log({err,insertedId:result.insertedId})
