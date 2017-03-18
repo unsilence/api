@@ -1,8 +1,8 @@
 "use strict"
-import _ from 'underscore'
-import * as Base from './_base'
+var _ = require('underscore')
+var Base = require('./_base')
 
-export var keys = Object.assign({},Base.keys,{
+var keys = exports.keys = Object.assign({},Base.keys,{
         name: {
             type: String,
             default: ''
@@ -55,5 +55,5 @@ export var keys = Object.assign({},Base.keys,{
         },
 
     })
-export var PRE = 'US'
+exports. PRE = 'US'
 Base._getThis(exports,keys,__filename)

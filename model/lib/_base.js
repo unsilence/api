@@ -1,10 +1,11 @@
 "use strict"
-import path from 'path'
-import moment from 'moment'
-import {ObjectID} from 'mongodb'
-import model from '../index'
-import _ from 'underscore'
-export var keys = {
+var path = require( 'path')
+var moment = require( 'moment')
+var {ObjectID} = require( 'mongodb')
+var model = require( '../index')
+var _ = require( 'underscore')
+
+var keys = exports.keys  = {
     qtext:{type:String,default:''},
     valid:{type: Boolean,default:true},
     updateAt:{type:Date,default: Date.now()},
@@ -12,9 +13,9 @@ export var keys = {
     createByUser:{type:String,default:''},
     lastModifyByUser:{type:String,default:''}
 }
-export var collectionName = 'test'
+ var collectionName = exports.collectionName = 'test'
 
-export var getById = (ithis,_id)=>{
+var getById = exports.getById = (ithis,_id)=>{
     console.log("model:: getById",ithis.collectionName,_id)
     return new Promise((resolve,reject)=>{
         let clt = model.getDb().collection(ithis.collectionName+'s')
@@ -25,7 +26,7 @@ export var getById = (ithis,_id)=>{
     }).catch(e=>console.log(e))
 }
 
-export var getByNum = (ithis,cnum)=>{
+var getByNum = exports . getByNum = (ithis,cnum)=>{
     console.log("model:: cnum",ithis.collectionName,_id)
     return new Promise((resolve,reject)=>{
         let clt = model.getDb().collection(ithis.collectionName+'s')
@@ -38,7 +39,7 @@ export var getByNum = (ithis,cnum)=>{
 
 
 
-export var updateById = (ithis,_id,options,ctx={sessionData:{user:{cnum:'--'}}})=>{
+var updateById = exports . updateById = (ithis,_id,options,ctx={sessionData:{user:{cnum:'--'}}})=>{
     console.log("model:: updateById ",ithis.collectionName,_id,"1212121212222222",options)
     return new Promise((resolve,reject)=>{
         let clt = model.getDb().collection(ithis.collectionName+'s')
@@ -95,7 +96,7 @@ let typeEnsure = (tp,v)=>{
         throw "wrong";
     }
 }
-export var addItem = (ithis,_id,options,ctx={sessionData:{user:{cnum:'--'}}})=>{
+ var addItem = exports. addItem = (ithis,_id,options,ctx={sessionData:{user:{cnum:'--'}}})=>{
     console.log("model:: addItem ",ithis.collectionName,options)
     return new Promise((resolve,reject)=>{
         let strpre = ithis.PRE + moment().format('YYMMDD')
@@ -133,7 +134,7 @@ export var addItem = (ithis,_id,options,ctx={sessionData:{user:{cnum:'--'}}})=>{
         })
     }).catch(e=>console.log(e))
 }
-export var deleteById = (ithis,_id)=>{
+var deleteById = exports . deleteById = (ithis,_id)=>{
     console.log("model:: deleteById ",ithis.collectionName,_id)
     return new Promise((resolve,reject)=>{
         let clt = model.getDb().collection(ithis.collectionName+'s')
@@ -146,7 +147,7 @@ export var deleteById = (ithis,_id)=>{
     }).catch(e=>console.log(e))
 }
 
-export var fetch = (ithis,filter,orderBy,limit,startPos)=>{
+var fetch = exports. fetch = (ithis,filter,orderBy,limit,startPos)=>{
     console.log("model:: fetch",ithis.collectionName,'fetch',filter,orderBy,limit,startPos)
     filter = filter || {}
     orderBy = orderBy || {createAt:-1}
@@ -167,7 +168,7 @@ export var fetch = (ithis,filter,orderBy,limit,startPos)=>{
 }
 
 let to2fu = f=>f.slice(0,1).toUpperCase()+f.slice(1,100).toLowerCase()
-export var _getThis = (_exports,keys,filename)=>{
+var _getThis = exports. _getThis = (_exports,keys,filename)=>{
     let ithis = {keys}
     ithis.collectionName = _exports.collectionName = path.basename(filename).replace('.js','')
     ithis.modelName = _exports.modelName = _exports.collectionName.split('_').map(v=>to2fu(v)).join('')

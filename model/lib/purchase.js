@@ -1,8 +1,8 @@
 "use strict"
-import _ from 'underscore'
-import * as Base from './_base'
+var _ = require('underscore')
+var Base = require('./_base')
 
-export var keys = Object.assign({}, Base.keys, {
+var keys = exports.keys = Object.assign({}, Base.keys, {
     takeNum: {
         type: String, //提货单号
         default: ''
@@ -110,5 +110,5 @@ export var keys = Object.assign({}, Base.keys, {
     }
 })
 
-export var PRE = 'PC'
+exports. PRE = 'PC'
 Base._getThis(exports, keys, __filename)

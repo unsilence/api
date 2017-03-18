@@ -1,9 +1,9 @@
 "use strict"
-import _ from 'underscore'
-import * as Base from './_base'
+var _ = require('underscore')
+var Base = require('./_base')
 
 // 设计师为顾客下的订单 可以是现货单 也可以是采购单  又可能财务角色 或者 采购角色代劳
-export var keys = Object.assign({},Base.keys,{
+var keys = exports.keys =Object.assign({},Base.keys,{
 
         customer_num: {
             type: String,
@@ -91,5 +91,5 @@ export var keys = Object.assign({},Base.keys,{
         }
     })
 
-export var PRE = 'OD'
+exports.PRE = 'OD'
 Base._getThis(exports,keys,__filename)

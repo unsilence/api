@@ -1,9 +1,9 @@
 "use strict"
-import _ from 'underscore'
-import * as Base from './_base'
+var _ = require('underscore')
+var Base = require('./_base')
 
 // 供货商  代替原来的品牌 品牌意思太单薄了
-export var keys = Object.assign({},Base.keys,{
+var keys = exports.keys = Object.assign({},Base.keys,{
 
         name: { //名字 如 品牌名
             type: String,
@@ -19,5 +19,5 @@ export var keys = Object.assign({},Base.keys,{
         }
 
     })
-export var PRE = 'SP'
+exports. PRE = 'SP'
 Base._getThis(exports,keys,__filename)

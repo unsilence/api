@@ -1,9 +1,9 @@
 "use strict"
-import _ from 'underscore'
-import * as Base from './_base'
+var _ = require('underscore')
+var Base = require('./_base')
 
 // 商品  可以包含1-n个部件
-export var keys = Object.assign({}, Base.keys, {
+var keys = exports.keys = Object.assign({}, Base.keys, {
     supllier_num: {
         type: String,
         default: ''
@@ -41,5 +41,5 @@ export var keys = Object.assign({}, Base.keys, {
     }
 
 })
-export var PRE = 'PD'
+exports. PRE = 'PD'
 Base._getThis(exports, keys, __filename)

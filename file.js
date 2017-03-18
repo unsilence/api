@@ -1,9 +1,9 @@
-import model from './model'
-import asyncBusboy from 'async-busboy';
+var model =require('./model')
+var  asyncBusboy  =require( 'async-busboy')
 const PassThrough = require('stream').PassThrough;
 const fs = require('fs');
 
-export default async (ctx, next) => {
+exports.middle = async (ctx, next) => {
     try {
         let urls = ctx.path.split('/')
         let clt = urls[1] || 'file'

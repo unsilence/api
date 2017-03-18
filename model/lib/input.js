@@ -1,9 +1,9 @@
 "use strict"
-import _ from 'underscore'
-import * as Base from './_base'
+var _ = require('underscore')
+var Base = require('./_base')
 
 // 入库信息  可以分多钟情况入库 如 集装箱到货  调库入库
-export var keys = Object.assign({},Base.keys,{
+var keys = exports.keys =Object.assign({},Base.keys,{
         itype:{ //调拨入库 采购入库 或者 退货入库
             type: String,
             default: ''
@@ -17,5 +17,5 @@ export var keys = Object.assign({},Base.keys,{
             default: ''
         }
     })
-export var PRE = 'IP'
+exports.PRE = 'IP'
 Base._getThis(exports,keys,__filename)

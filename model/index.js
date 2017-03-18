@@ -20,11 +20,11 @@ let namelist = fileList.map(v=>path.basename(v))
     .filter(v=>!v.startsWith('_')).map(v=>{
     var d = require('./lib/'+v)
     console.log('model::',d.modelName,d)
-    _dict[d.modelName] = d
+    exports[d.modelName] = d
 })
 
 let _db
-_dict.getDb = ()=>{
+exports.getDb = ()=>{
     return _db
 }
 
@@ -32,14 +32,14 @@ const mongo = require('mongodb');
 
 let MongoClient = _dict.MongoClient = mongo.MongoClient
 
-_dict.connect = mstr => {
+exports.connect = mstr => {
     MongoClient.connect(mstr,function(err,db){
         _db = db
         console.log('connect ok',mstr,err)
     })
 }
 const Grid = require('gridfs-stream');
-_dict.fileSave = file =>{
+exports.fileSave = file =>{
     console.log("model:: fileSave",file)
     return new Promise((resolve, reject)=>{
         var gfs = Grid(_db,mongo);
@@ -61,7 +61,7 @@ _dict.fileSave = file =>{
         })
     }).catch(e=>console.log(e))
 }
-_dict.fileRead = strmd5 =>{
+exports.fileRead = strmd5 =>{
     console.log("model:: fileRead ",strmd5)
     var gfs = Grid(_db,mongo);
     let opt ={md5:strmd5}
@@ -73,4 +73,3 @@ _dict.fileRead = strmd5 =>{
         })
     }).catch(e=>console.log(e))
 }
-export default _dict

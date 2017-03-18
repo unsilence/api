@@ -1,17 +1,18 @@
 "use strict"
+
 var koa = require('koa');
 var app = new koa();
 var getRawBody = require('./raw')
-import model from './model'
-import authMiddle from './auth'
-import fileMiddle from './file'
+var model =  require('./model')
+var authMiddle = require('./auth')
+var fileMiddle = require('./file')
 
 var body = require('koa-better-body')
 
 model.connect('mongodb://localhost:27017/im_dev')
 //文件处理
 // app.use(body())
-app.use(fileMiddle)
+app.use(fileMiddle.middle)
 
 
 
@@ -29,7 +30,7 @@ app.use(async (ctx, next) => {
     }
 })
 //访问权限
-app.use(authMiddle)
+app.use(authMiddle.middle)
 //特殊接口 ...
 
 app.use(async (ctx,next) => {

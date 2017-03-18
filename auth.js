@@ -1,4 +1,4 @@
-import model from './model'
+var model = require( './model')
 const ACTIONS ={
     //获得一个会话的token
     //发送验证码
@@ -56,7 +56,7 @@ const ACTIONS ={
         ctx.body = {status:'success',msg:'退出成功'}
     }
 }
-export default async (ctx, next) => {
+exports.middle = async (ctx, next) => {
     try {
         let urls = ctx.path.split('/')
         let clt = urls[1] || 'file'
