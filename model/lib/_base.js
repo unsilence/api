@@ -38,7 +38,7 @@ export var getByNum = (ithis,cnum)=>{
 
 
 
-export var updateById = (ithis,_id,options,ctx)=>{
+export var updateById = (ithis,_id,options,ctx={sessionData:{user:{cnum:'--'}}})=>{
     console.log("model:: updateById ",ithis.collectionName,_id,"1212121212222222",options)
     return new Promise((resolve,reject)=>{
         let clt = model.getDb().collection(ithis.collectionName+'s')
@@ -95,7 +95,7 @@ let typeEnsure = (tp,v)=>{
         throw "wrong";
     }
 }
-export var addItem = (ithis,_id,options,ctx)=>{
+export var addItem = (ithis,_id,options,ctx={sessionData:{user:{cnum:'--'}}})=>{
     console.log("model:: addItem ",ithis.collectionName,options)
     return new Promise((resolve,reject)=>{
         let strpre = ithis.PRE + moment().format('YYMMDD')

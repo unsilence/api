@@ -16,8 +16,80 @@ export var keys = Object.assign({},Base.keys,{
         contract_num: {
             type: String,
             default: ''
+        },
+        order_type: {
+            type: String,
+            default: ''
+        },
+        product_type: {
+            type: String,
+            default: ''
+        },
+        supply: {
+            type: String,
+            default: ''
+        },
+        brand: {
+            type: String,
+            default: ''
+        },
+        buyer_info: {
+            type: String,
+            default: ''
+        },
+        buyer_order: {
+            type: String,
+            default: ''
+        },
+        buyer_master: {
+            type: String,
+            default: ''
+        },
+        project_master: {
+            type: String,
+            default: ''
+        },
+        depart_master: {
+            type: String,
+            default: ''
+        },
+        money: {
+            type: String,
+            default: ''
+        },
+        quantity: {
+            type: String,
+            default: ''
+        },
+        real_discount: {
+            type: String,
+            default: ''
+        },
+        ag_discount: {
+            type: String,
+            default: ''
+        },
+        standard_discount: {
+            type: String,
+            default: ''
+        },
+        real_reward: {
+            type: String,
+            default: ''
+        },
+        ag1rate: {        //首期集成系数
+            type: String,
+            default: ''
+        },
+        ag1money: {        //首期业绩
+            type: String,
+            default: ''
+        },
+        order_at: {
+            type: String,
+            default: ''
         }
-
     })
+
 export var PRE = 'OD'
 Base._getThis(exports,keys,__filename)
