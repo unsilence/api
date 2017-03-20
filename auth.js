@@ -1,4 +1,9 @@
 var model = require( './model')
+var SMS = require('aliyun-sms-node');
+var sms = new SMS({
+  AccessKeyId: 'LTAImtdqTNtyFo5T',
+  AccessKeySecret: 'yTXzYEcrgGAKrEbCvpqoqq52bGGW1r'
+});
 const ACTIONS ={
     //获得一个会话的token
     //发送验证码
@@ -11,9 +16,19 @@ const ACTIONS ={
     async get_code(ctx,next){
         let item = await model.Session.getById(ctx.query.token)
         if(item){
-            let code = '1234'
+            let code = parseInt(Math.random()*10000)
             let codeCreateAt = Date.now()
             let {phone} = JSON.parse(ctx.rawBody);
+
+            sms.send({
+              Action:'SingleSendSms',
+              Format:'JSON',
+              ParamString:'{"name":"'+code+'"}',
+              RecNum:phone,
+              SignName:'尚层美家科技',
+              TemplateCode:'SMS_56710389',
+            })
+
             let sessionData = Object.assign({},JSON.parse(item.data),{phone,code,codeCreateAt})
             await model.Session.updateById(item._id,{data:JSON.stringify(sessionData)})
             ctx.body = {status:'success',msg:'验证码已经发送'}
