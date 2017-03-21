@@ -12,6 +12,10 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
         type: String,
         default: ''
     },
+    size:{
+        type: String,
+        default: ''
+    },
     components: {
         type: [
             {
