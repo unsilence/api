@@ -10,7 +10,7 @@ let functions = keys.filter(v=>v[0].toLowerCase() == v[0])
 console.log('functions:',functions)
 let tablesMap={}
 tables.map(k=>{
-    tablesMap[k]=_.keys(model[k].keys).sort()
+    tablesMap[k]= ['cnum'].concat( _.keys(model[k].keys).sort())
 })
 console.log('tables:',tablesMap)
 

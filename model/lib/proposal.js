@@ -6,7 +6,36 @@ var Base = require('./_base')
 var keys = exports.keys = Object.assign({},Base.keys,{
 
         //在想想...
-
+        products: {
+            type: [
+                {
+                    product_num: {
+                        type: String,
+                        default: ''
+                    },
+                    quantity: {
+                        type: String,
+                        default: ''
+                    }
+                }
+            ],
+            default: []
+        },
+      pic: {
+          type: String,
+          default: ''
+      },
+      figures:{
+          type: [
+              {
+                  pic: {
+                      type: String,
+                      default: ''
+                  }
+              }
+          ],
+          default: []
+      }
     })
 exports. PRE = 'PS'
 Base._getThis(exports,keys,__filename)

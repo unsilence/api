@@ -15,7 +15,7 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
         type: String, //计划到货日期
         default: ''
     },
-    currencyNum: {
+    currency_num: {
         type: String, //币种
         default: ''
     },
@@ -30,7 +30,7 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
         ], //
         default: '' //备注
     },
-    orderMessage: {
+    orders: {
         type: [
             {
                 productIdentity: {

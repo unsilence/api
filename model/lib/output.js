@@ -9,12 +9,25 @@ var keys = exports. keys = Object.assign({},Base.keys,{
         type: String,
         default: ''
     },
-
+    stocks: {
+        type: [
+            {
+                stock_num: {
+                    type: String,
+                    default: ''
+                }
+            }
+        ],
+        default: []
+    },
     note: {
         type: String,
         default: ''
+    },
+    customer_num:{
+      type: String,
+      default: ''
     }
-
     })
 exports. PRE = 'OP'
 Base._getThis(exports,keys,__filename)

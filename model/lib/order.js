@@ -88,7 +88,22 @@ var keys = exports.keys =Object.assign({},Base.keys,{
         order_at: {
             type: String,
             default: ''
-        }
+        },
+        products: {
+            type: [
+                {
+                    product_num: {
+                        type: String,
+                        default: ''
+                    },
+                    quantity: {
+                        type: String,
+                        default: ''
+                    }
+                }
+            ],
+            default: []
+        },
     })
 
 exports.PRE = 'OD'
