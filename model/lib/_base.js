@@ -27,7 +27,7 @@ var getById = exports.getById = (ithis,_id)=>{
 }
 
 var getByNum = exports . getByNum = (ithis,cnum)=>{
-    console.log("model:: cnum",ithis.collectionName,_id)
+    console.log("model:: cnum",ithis.collectionName)
     return new Promise((resolve,reject)=>{
         let clt = model.getDb().collection(ithis.collectionName+'s')
         clt.findOne({cnum:cnum,valid:true},function(err,doc){
