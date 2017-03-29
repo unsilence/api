@@ -1,7 +1,7 @@
 "use strict"
 
-import _ from 'underscore'
-import model from '../model'
+const _ = require('underscore')
+const model = require('../model')
 console.log('\n--------------enter script/createRD.js '+new Date()+'-------------------------')
 
 let keys = _.keys(model).filter(v=>v.toLowerCase().indexOf('mongo') == -1).sort()
