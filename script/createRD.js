@@ -14,12 +14,22 @@ tables.map(k=>{
 })
 console.log('tables:',tablesMap)
 
+
+let comkeys = {
+    qtext:{type:String,default:''},
+    valid:{type: Boolean,default:true},
+    updateAt:{type:Date,default: Date.now()},
+    createAt:{type:Date,default: Date.now()},
+    createByUser:{type:String,default:''},
+    lastModifyByUser:{type:String,default:''}
+}
+
 let str = `
 digraph structs {
     node [shape=record,fontsize = 10, color="skyblue"];
 `
 tables.map(schema=>{
-    let cols = tablesMap[schema]
+    let cols = tablesMap[schema].filter(v=>!(v in comkeys))
     let _s = ''
     cols.map(v=>{
        _s = _s + `|<f_${v}>${v} `
@@ -27,34 +37,47 @@ tables.map(schema=>{
     str = str + ` struct_${schema.toLowerCase()} [shape=record,label="{<f0> [${schema}] ${_s}}"];
   `
 })
-// tables.map(schema=>{
-//     let cols = tablesMap[schema]
-//     let _s = ''
-//     let ci = 0
-//     cols.map(v=>{
-//       ci++
-//       let cid = v.slice(v.length-4,v.length)
-//       if(cid === 'Id' ){
-//         let fromSchema = schema.toLowerCase()
-//         let toSchema = v.slice(0,v.length-2).toLowerCase()
-//         str = str +`struct_${fromSchema}:f_${v} -> struct_${toSchema}:f_id;
-//   `
-//       }
-//     })
-// })
+let stables = {}
+tables.map(i=>stables[i.toLowerCase()]=1)
+
+console.log('stables',stables)
+tables.map(schema=>{
+    console.log('check',schema)
+    let cols = tablesMap[schema]
+    let _s = ''
+    let ci = 0
+    cols.map(v=>{
+      ci++
+      let cid = v.slice(v.length-4,v.length)
+      if(cid === '_num' || v.endsWith('s')){
+        let fromSchema = schema.toLowerCase()
+        let toSchema = v.slice(0,v.length-4).toLowerCase()
+        if(v.endsWith('s')) toSchema = v.slice(0,v.length-1)
+
+        console.log('check',schema,v,{toSchema},toSchema in stables)
+        if(toSchema in stables){
+          let c = v.endsWith('s')? '[color="blue"]' : ''
+          str = str +`struct_${fromSchema}:f_${v} -> struct_${toSchema}:f_id ${c};
+  `
+        }
+
+
+      }
+    })
+})
 
 str = str + `
 }  `
 
-console.log('dot content \n',str)
+// console.log('dot content \n',str)
 
 var fs = require('fs')
-var _f = '/tmp/doc_'+Date.now()
+var _f = 'doc_'+Date.now()
 fs.writeFileSync(_f,str)
 console.log('tmp save',_f)
 
 var sys = require('sys')
 var exec = require('child_process').exec;
 function puts(error, stdout, stderr) { sys.puts(stdout) }
-console.log("dot "+_f+" -Kdot  -Tpng  -o ../rd-"+Date.now()+".png")
+console.log("dot "+_f+" -Kdot  -Tpng  -o rd-"+Date.now()+".png")
 exec("dot "+_f+" -Kdot  -Tpng  -o rd-"+Date.now()+".png", puts);
