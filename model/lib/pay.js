@@ -29,6 +29,10 @@ var keys = exports.keys = Object.assign({},Base.keys,{
         type: String,
         default: ''
     },
+        order_num : {
+        type: String,
+        default: ''
+    },
     batch:{type:[{
         origin_money: {
             type: String,
