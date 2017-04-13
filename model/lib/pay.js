@@ -29,7 +29,18 @@ var keys = exports.keys = Object.assign({},Base.keys,{
         type: String,
         default: ''
     },
-        order_num : {
+    origin_sum_history :{type:[{
+        origin_sum: {
+            type: String,
+            default: ''
+        },
+        changeAt: {
+            type: String,
+            default: ''
+        }
+    }],default:[]},
+    
+    order_num : {
         type: String,
         default: ''
     },
