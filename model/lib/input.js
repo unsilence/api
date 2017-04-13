@@ -94,6 +94,14 @@ var keys = exports.keys =Object.assign({},Base.keys,{
             type: String,
             default: ''
         }
+        ,
+        status:{
+            type: String,
+            enum: [
+                'unfinish', 'finish' // 进行中 已完成
+            ],
+            default: 'unfinish'
+        }
     })
 exports.PRE = 'IP'
 Base._getThis(exports,keys,__filename)
