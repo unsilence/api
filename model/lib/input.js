@@ -8,10 +8,21 @@ var keys = exports.keys =Object.assign({},Base.keys,{
             type: String,
             default: ''
         },
-        purchase_num: { //采购单号
+        record_num: { //采购单号 or output_num
             type: String,
             default: ''
         },
+		stocks: {
+			type: [
+				{
+					stock_num: {
+						type: String,
+						default: ''
+					}
+				}
+			],
+			default: []
+		},
         orders: {
             type: [
                 {
