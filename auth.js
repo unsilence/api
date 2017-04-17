@@ -69,6 +69,13 @@ const ACTIONS ={
     async logout(ctx,next){
         let item = await model.Session.deleteById(ctx.query.token)
         ctx.body = {status:'success',msg:'退出成功'}
+    },
+    async roles(ctx,next){
+      let roles  = []
+      Object.keys(role).map(k=>{
+        roles.push({name:k,auth:role[k].tables})
+      })
+      ctx.body = {status:'success',data:{list:roles}}
     }
 }
 

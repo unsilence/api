@@ -20,15 +20,15 @@ let namelist = fileList.map(v=>path.basename(v))
     .filter(v=>!v.startsWith('_')).map(v=>{
     var d = require('./lib/'+v)
     console.log('role::',v,d)
-    exports[v] = roles[v.split('.')[0]] = d
+    exports[v.split('.')[0]] = roles[v.split('.')[0]] = d
 })
 
 exports.middle = async (ctx, next) => {
     try {
         let session = ctx.sessionData
-        session.role =  session.role || {itype:'designer'}
+        session.role =  session.role || 'designer'
         console.log('check role',session.role,roles)
-        let rl = roles[session.role.itype]
+        let rl = roles[session.role]
         let s = await rl.check(ctx)
         console.log('role check result:',s)
         return  s
