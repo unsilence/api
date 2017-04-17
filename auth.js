@@ -71,6 +71,8 @@ const ACTIONS ={
         ctx.body = {status:'success',msg:'退出成功'}
     }
 }
+
+const role = require('./role')
 exports.middle = async (ctx, next) => {
     try {
         let urls = ctx.path.split('/')
@@ -87,7 +89,13 @@ exports.middle = async (ctx, next) => {
             if(item){
                 let sessionData = Object.assign({},JSON.parse(item.data))
                 ctx.sessionData = sessionData
-                await next()
+                let s = await role.middle(ctx)
+                if(s === true ){
+                  await next()
+                }else{
+                  ctx.body = {status:'wrong',msg:'权限不足，请联系技术部'}
+                }
+
             }else{
                 ctx.body = {status:'wrong',msg:'请使用/auth/login接口登录'}
             }

@@ -37,6 +37,10 @@ var keys = exports.keys = Object.assign({},Base.keys,{
             type: String,
             default: ''
         },
+        channel_master: {
+            type: String,
+            default: ''
+        },
         market_master: {
             type: String,
             default: ''
