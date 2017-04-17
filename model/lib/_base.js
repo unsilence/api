@@ -10,7 +10,7 @@ var keys = exports.keys  = {
     valid:{type: Boolean,default:true},
     updateAt:{type:Date,default: Date.now()},
     createAt:{type:Date,default: Date.now()},
-    createByUser:{type:String,default:''},
+    ownByUser:{type:String,default:''},
     lastModifyByUser:{type:String,default:''}
 }
  var collectionName = exports.collectionName = 'test'
@@ -121,7 +121,7 @@ let typeEnsure = (tp,v)=>{
             }
             item.cnum = cnum
             item.updateAt = item.createAt = new Date()
-            item.createByUser = ctx.sessionData.user.cnum
+            item.ownByUser = ctx.sessionData.user.cnum
             item.lastModifyByUser = ctx.sessionData.user.cnum
             console.log('insert---------------------------------',{item})
             clt.insertOne(item,function(err,result){

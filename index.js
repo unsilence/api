@@ -39,9 +39,9 @@ app.use(async (ctx,next) => {
     let method = urls[2] || 'fetch'
     let {id,filter,limit,startPos,orderBy,item,cnum} = JSON.parse(ctx.rawBody)
     console.log(clt,method,{id,filter,limit,startPos,orderBy})
-
+    filter = filter || {}
     if((method === 'addItem' || method.endsWith('Num')  || method.endsWith('ById')) && clt in model &&  method in model[clt]){
-        let ret 
+        let ret
         if(method.endsWith('Num')){
             ret = await model[clt][method](cnum,ctx)
         }else{
@@ -49,6 +49,9 @@ app.use(async (ctx,next) => {
         }
         ctx.body = {status:'success',msg:'hello world!',data:{item:ret}}
     }else{
+        if(ctx.isAll !== true){
+          filter.ownByUser = ctx.sessionData.user.cnum
+        }
         let {list,count} = await model[clt][method](filter,orderBy,limit,startPos)
         ctx.body = {status:'success',msg:'hello world!',data:{list,count}}
     }
