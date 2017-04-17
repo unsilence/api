@@ -47,12 +47,20 @@ app.use(async (ctx,next) => {
         }else{
             ret = await model[clt][method](id,item,ctx)
         }
+        delete ret.qtext
+        delete ret.valid
+        delete ret.lastModifyByUser
         ctx.body = {status:'success',msg:'hello world!',data:{item:ret}}
     }else{
         if(ctx.isAll !== true){
           filter.ownByUser = ctx.sessionData.user.cnum
         }
         let {list,count} = await model[clt][method](filter,orderBy,limit,startPos)
+        list.map(d=>{
+          delete d.qtext
+          delete d.valid
+          delete d.lastModifyByUser
+        })
         ctx.body = {status:'success',msg:'hello world!',data:{list,count}}
     }
 });
