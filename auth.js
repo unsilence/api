@@ -16,7 +16,7 @@ const ACTIONS ={
     async get_code(ctx,next){
         let item = await model.Session.getById(ctx.query.token)
         if(item){
-            let code = parseInt(Math.random()*10000)
+            let code = (parseInt(Math.random()*10000)+'0000').slice(0,4)
             let codeCreateAt = Date.now()
             let {phone} = JSON.parse(ctx.rawBody);
 
@@ -53,6 +53,7 @@ const ACTIONS ={
             u = await model.User.addItem(null,{phone})
         }
         sessionData.user=u
+        sessionData.user.role = sessionData.user.role  || 'designer'
         await model.Session.updateById(item._id,{data:JSON.stringify(sessionData)})
         ctx.body = {status:'success',data:{item:u,token:item._id}}
     },

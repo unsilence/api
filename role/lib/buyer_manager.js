@@ -13,12 +13,14 @@ var check = exports.check =  async (ctx, next) => {
   if(clt in tables){
     if(action in modifyActions){ //是否是写操作
       if(tables[clt].write == 'all'){
+        ctx.isAll = true
         return true
       }else {
         return true //这里要补加 过滤只改自己的
       }
     }else{ //读操作
       if(tables[clt].read == 'all'){
+        ctx.isAll = true
         return true
       }else {
         return true //这里要补加 过滤只读自己的
