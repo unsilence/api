@@ -9,7 +9,7 @@ var fileMiddle = require('./file')
 
 var body = require('koa-better-body')
 
-model.connect('mongodb://localhost:27017/im')
+model.connect('mongodb://localhost:27017/im_dev')
 //文件处理
 // app.use(body())
 app.use(fileMiddle.middle)
@@ -66,4 +66,4 @@ app.use(async (ctx,next) => {
     }
 });
 
-app.listen(10000);
+app.listen(80);
