@@ -26,9 +26,8 @@ let namelist = fileList.map(v=>path.basename(v))
 exports.middle = async (ctx, next) => {
     try {
         let session = ctx.sessionData
-        session.role =  session.role || 'designer'
-        console.log('check role',session.role,roles)
-        let rl = roles[session.role]
+        console.log('check role',session.user.role)
+        let rl = roles[session.user.role||'designer']
         let s = await rl.check(ctx)
         console.log('role check result:',s)
         return  s

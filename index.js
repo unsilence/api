@@ -9,7 +9,7 @@ var fileMiddle = require('./file')
 
 var body = require('koa-better-body')
 
-model.connect('mongodb://localhost:27017/im_dev')
+model.connect('mongodb://localhost:27017/im')
 //文件处理
 // app.use(body())
 app.use(fileMiddle.middle)
@@ -52,6 +52,7 @@ app.use(async (ctx,next) => {
         delete ret.lastModifyByUser
         ctx.body = {status:'success',msg:'hello world!',data:{item:ret}}
     }else{
+        console.log('ctx.isAll',ctx.isAll)
         if(ctx.isAll !== true){
           filter.ownByUser = ctx.sessionData.user.cnum
         }

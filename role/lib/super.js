@@ -27,14 +27,14 @@ var check = exports.check =  async (ctx, next) => {
   let urls = ctx.path.split('/')
   let clt = urls[1] || 'file'
   let action = urls[2] || ''
-
+  console.log(' in super')
   if(clt in tables){
     if(action in modifyActions){ //是否是写操作
       if(tables[clt].write == 'all'){
         ctx.isAll = true
         return true
       }else {
-        ctx.isAll = false
+        ctx.isAll = true
         return true //这里要补加 过滤只改自己的
       }
     }else{ //读操作
@@ -42,7 +42,7 @@ var check = exports.check =  async (ctx, next) => {
         ctx.isAll = true
         return true
       }else {
-        ctx.isAll = false
+        ctx.isAll = true
         return true //这里要补加 过滤只读自己的
       }
     }
