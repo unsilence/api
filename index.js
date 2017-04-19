@@ -9,7 +9,7 @@ var fileMiddle = require('./file')
 
 var body = require('koa-better-body')
 
-model.connect('mongodb://localhost:27017/im_dev')
+model.connect('mongodb://localhost:27017/im_online')
 //文件处理
 // app.use(body())
 app.use(fileMiddle.middle)
@@ -30,6 +30,8 @@ app.use(async (ctx, next) => {
     }
 })
 //访问权限
+
+
 app.use(authMiddle.middle)
 //特殊接口 ...
 
