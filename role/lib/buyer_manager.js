@@ -3,6 +3,8 @@ var _ = require( 'underscore');
 var _base = require('./_base');
 
 var tables = exports.tables =  Object.assign({},_base.tables);
+tables.Purchase={read:'all',write:'all'}
+tables.Product={read:'all',write:'all'}
 
 const modifyActions = {updateById:1,addItem:1,deleteById:1}
 var check = exports.check =  async (ctx, next) => {

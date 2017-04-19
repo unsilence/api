@@ -9,7 +9,6 @@ tables.Order={read:'all',write:'all'}
 tables.Pay={read:'all',write:'all'}
 tables.Receive={read:'all',write:'all'}
 tables.Stock={read:'all',write:'all'}
-tables.Stock={read:'all',write:'all'}
 
 const modifyActions = {updateById:1,addItem:1,deleteById:1}
 var check = exports.check =  async (ctx, next) => {
