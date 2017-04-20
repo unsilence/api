@@ -33,6 +33,10 @@ var keys = exports.keys = Object.assign({},Base.keys,{
             type: String,
             default: ''
         },
+        www_salesman: { 
+            type: String,
+            default: ''
+        },
         channel_name: {
             type: String,
             default: ''
