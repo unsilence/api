@@ -6,7 +6,7 @@ var tables = exports.tables =  Object.assign({},_base.tables);
 
 tables.Customer={read:'all',write:'self'}
 tables.Order={read:'all',write:'self'}
-tables.Stock={read:'self',write:'self'}
+tables.Stock={read:'all',write:'self'}
 
 const modifyActions = {updateById:1,addItem:1,deleteById:1}
 var check = exports.check =  async (ctx, next) => {
