@@ -1,6 +1,9 @@
 const xl = require('excel4node');
 const PassThrough = require('stream').PassThrough;
 const model = require('../../model')
+const sharp = require('sharp')
+const BufferHelper = require('bufferhelper');
+
 
 const cols = [
 {key:'cnum',name:'现货编号',width:20}
@@ -15,6 +18,25 @@ const cols = [
 ,{key:'status',name:'库房属性',width:20}]
 const names = {sold:'已售',waitout:'未出库',out:'已出库',may:'未销售',waitin:'等待入库'}
 
+const stream2buffer = (readStream) => {
+	return new Promise((resv,rejc)=>{
+		let buffers = [];
+		readStream.on("data",chunk => buffers.push(chunk) )
+		readStream.on("end", ()=>{
+			resv(Buffer.concat(buffers))
+		})
+	})
+}
+const buffer2resize = (buf,nname)=>{
+	return new Promise((resv,rejc)=>{
+	 	sharp(buf)
+		.resize(300, 150)
+		.toFile(nname, (err, info) => {
+			console.log('info',{err,info})
+			resv(info)
+		});
+	})
+}
 exports.middle = async (ctx, next) => {
 	var wb = new xl.Workbook();
 	var ws = wb.addWorksheet('现货');
@@ -27,28 +49,39 @@ exports.middle = async (ctx, next) => {
 			ws.column(col).setWidth(d.width);
 			ws.cell(line,col++).string(d.name).style(style)
 	}
-	stocks.list.map(st=>{
+	for (let st of stocks.list){
 		ws.row(++line).setHeight(50);
 		col=1
 		for(let d of cols){
 				let v = names[st[d.key]]||st[d.key]
 				ws.cell(line,col++).string(v).style(style)
 		}
-		if(line<10){
-			ws.addImage({
-			    path: '/root/im-api/text.jpg',
-			    type: 'picture',
-			    position: {
-			        type: 'twoCellAnchor',
-			        from: {col: 2,colOff: 0,row: line,rowOff: 0},
-							to: {col: 3,colOff: 0,row: line+1,rowOff: 0}
-			    }
-			});
+		if(st.pic.length == 32){
+			try{
+				let readStream = await model.fileRead(st.pic)
+				let buf = await stream2buffer(readStream)
+				let nname = '/tmp/100_'+st.pic+'.png'
+				await buffer2resize(buf,nname)
+				console.log('save',nname)
+				ws.addImage({
+						path: nname,
+						type: 'picture',
+						position: {
+								type: 'twoCellAnchor',
+								from: {col: 2,colOff: 0,row: line,rowOff: 0},
+								to: {col: 3,colOff: 0,row: line+1,rowOff: 0}
+						}
+				});
+				console.log('pic add ',st.cnum,'ok')
+			}catch(e){
+				console.log(e)
+			}
 		}
 
-
-	})
+	}
   ctx.body = await  wb.writeToBuffer()
   ctx.type = 'application/vnd.ms-excel';
   ctx.set('Content-disposition','attachment;filename=xianhuo.xlsx');
+
+
 }
