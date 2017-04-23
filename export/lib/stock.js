@@ -1,58 +1,54 @@
 const xl = require('excel4node');
 const PassThrough = require('stream').PassThrough;
+const model = require('../../model')
+
+const cols = [
+{key:'cnum',name:'现货编号',width:20}
+,{key:'pic',name:'图片',width:20}
+,{key:'warehouse_num',name:'展厅/库房',width:20}
+,{key:'product_num',name:'商品编号',width:20}
+,{key:'product_supplier',name:'品牌',width:20}
+,{key:'product_model',name:'型号',width:20}
+,{key:'product_name',name:'名字',width:20}
+,{key:'componnents',name:'部件',width:20}
+,{key:'status_sale',name:'销售属性',width:20}
+,{key:'status',name:'库房属性',width:20}]
+const names = {sold:'已售',waitout:'未出库',out:'已出库',may:'未销售',waitin:'等待入库'}
 
 exports.middle = async (ctx, next) => {
-// Create a new instance of a Workbook class
-var wb = new xl.Workbook();
+	var wb = new xl.Workbook();
+	var ws = wb.addWorksheet('现货');
+	var style = wb.createStyle({font: {color: '#000000',size: 12},numberFormat: '$#,##0.00; ($#,##0.00); -'});
+	let stocks = await model.Stock.fetch({},'-_id',10000*10000,0)  //filter,orderBy,limit,startPos
+	console.log('stocks.length',stocks.list.length)
+	let line = 1 ;
+	let col = 1;
+	for(let d of cols){
+			ws.column(col).setWidth(d.width);
+			ws.cell(line,col++).string(d.name).style(style)
+	}
+	stocks.list.map(st=>{
+		ws.row(++line).setHeight(50);
+		col=1
+		for(let d of cols){
+				let v = names[st[d.key]]||st[d.key]
+				ws.cell(line,col++).string(v).style(style)
+		}
+		if(line<10){
+			ws.addImage({
+			    path: '/root/im-api/text.jpg',
+			    type: 'picture',
+			    position: {
+			        type: 'twoCellAnchor',
+			        from: {col: 2,colOff: 0,row: line,rowOff: 0},
+							to: {col: 3,colOff: 0,row: line+1,rowOff: 0}
+			    }
+			});
+		}
 
-// Add Worksheets to the workbook
-var ws = wb.addWorksheet('Sheet 1');
-var ws2 = wb.addWorksheet('Sheet 2');
 
-// Create a reusable style
-var style = wb.createStyle({
-	font: {
-		color: '#FF0800',
-		size: 12
-	},
-	numberFormat: '$#,##0.00; ($#,##0.00); -'
-});
-
-// Set value of cell A1 to 100 as a number type styled with paramaters of style
-ws.cell(1,1).number(100).style(style);
-
-// Set value of cell B1 to 300 as a number type styled with paramaters of style
-ws.cell(1,2).number(200).style(style);
-
-// Set value of cell C1 to a formula styled with paramaters of style
-ws.cell(1,3).formula('A1 + B1').style(style);
-
-// Set value of cell A2 to 'string' styled with paramaters of style
-ws.cell(2,1).string('string').style(style);
-ws.addImage({
-    path: '/root/im-api/text.jpg',
-    type: 'picture',
-    position: {
-        type: 'twoCellAnchor',
-        from: {
-            col: 1,
-            colOff: 0,
-            row: 10,
-            rowOff: 0
-        },
-        to: {
-            col: 4,
-            colOff: 0,
-            row: 13,
-            rowOff: 0
-        }
-    }
-});
-// Set value of cell A3 to true as a boolean type styled with paramaters of style but with an adjustment to the font size.
-ws.cell(3,1).bool(true).style(style).style({font: {size: 14}});
-  let n = await  wb.writeToBuffer()
-  ctx.body = n
+	})
+  ctx.body = await  wb.writeToBuffer()
   ctx.type = 'application/vnd.ms-excel';
-  ctx.set('Content-disposition','attachment;filename=abc.xlsx');
-  console.log('return ...')
+  ctx.set('Content-disposition','attachment;filename=xianhuo.xlsx');
 }
