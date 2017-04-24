@@ -38,10 +38,26 @@ const buffer2resize = (buf,nname)=>{
 	})
 }
 exports.middle = async (ctx, next) => {
+	let item = await model.Session.getById(ctx.query.token)
+	let sessionData
+	if(item){
+			sessionData = Object.assign({},JSON.parse(item.data))
+			ctx.body = {status:'success',data:{item:sessionData.user}}
+	}else{
+			ctx.body = {status:'wrong',msg:'请使用/auth/login接口登录'}
+			return
+	}
+
 	var wb = new xl.Workbook();
 	var ws = wb.addWorksheet('现货');
 	var style = wb.createStyle({font: {color: '#000000',size: 12},numberFormat: '$#,##0.00; ($#,##0.00); -'});
-	let stocks = await model.Stock.fetch({},'-_id',10000*10000,0)  //filter,orderBy,limit,startPos
+	let flt
+	if(sessionData.user.role == 'warehouse_manager'){
+		flt ={}
+	}else {
+		flt = {ownByUser:sessionData.user.cnum}
+	}
+	let stocks = await model.Stock.fetch(flt,'-_id',10000*10000,0)  //filter,orderBy,limit,startPos
 	console.log('stocks.length',stocks.list.length)
 	let line = 1 ;
 	let col = 1;
