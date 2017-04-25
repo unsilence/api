@@ -47,12 +47,16 @@ var keys = exports.keys = Object.assign({},Base.keys,{
         type: String,
         default: ''
     },
-    status_sale:{
+    status_sale:{  // == may 表示为现货  == sold表示到货 这时customer_num要存储客户的编号
         type: String,
         enum: [
             'may', 'sold'
         ],
         default: 'may'
+    },
+    customer_num:{
+      type: String,
+      default: ''
     },
     status:{
         type: String,
