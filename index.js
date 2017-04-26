@@ -70,4 +70,13 @@ app.use(async (ctx,next) => {
     }
 });
 
-app.listen(80);
+const message = require('./message')
+
+var server = require('http').createServer(app.callback());
+var io = require('socket.io')(server);
+message.bind(io)
+
+const port = 3000
+console.log('port:',port)
+
+server.listen(port);
