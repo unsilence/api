@@ -43,6 +43,13 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
                           type: String,
                           default: ''
                       },
+                      status: {
+                          type: String,
+                          enum: [
+                              'waitAudit', 'waitInput', 'inStock' // .. 未入库  已入库
+                          ], //
+                          default: '' //备注
+                      },
                       buyAt:{
                           type: String,
                           default: ''
