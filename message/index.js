@@ -27,9 +27,9 @@ exports.bind = (io)=>{
   IO = io
   io.on('connection',(socket)=>{
       console.log('connection ddd')
-      socket.on('chat message', function(msg){
+      socket.on('modify', function(msg){
         console.log('message:',msg)
-        io.emit('chat message', msg);
+        io.emit('user', msg);
       });
   })
 }

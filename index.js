@@ -76,7 +76,7 @@ var server = require('http').createServer(app.callback());
 var io = require('socket.io')(server);
 message.bind(io)
 
-const port = 3000
+const port = 88
 console.log('port:',port)
 
 server.listen(port);
