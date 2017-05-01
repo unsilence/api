@@ -23,12 +23,19 @@ let ACTIONS = {}
 //     exports[v.split('.')[0]] = ACTIONS[v.split('.')[0]] = d.middle
 // })
 let IO
+let tokens = exports.tokens = {}
+
 exports.bind = (io)=>{
-  IO = io
+  IO = exports.IO = io
   io.on('connection',(socket)=>{
-      console.log('connection ddd')
+      console.log('connection',socket.id)
+      socket.on('login',token=>{
+        console.log('message::login',token,socket.id)
+        tokens[token]=socket
+      })
       socket.on('modify', function(msg){
         console.log('message:',msg)
+        //io.sockets.socket(socketid).emit(‘String’, data);
         io.emit('user', msg);
       });
   })

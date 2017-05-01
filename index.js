@@ -36,7 +36,7 @@ app.use(async (ctx, next) => {
 
 app.use(require('./auth').middle)
 //特殊接口 ...
-
+const UserMessage = require('./message/lib/user')
 app.use(async (ctx,next) => {
     let urls = ctx.path.split('/')
     let clt = urls[1] || 'Color'
@@ -50,6 +50,9 @@ app.use(async (ctx,next) => {
             ret = await model[clt][method](cnum,ctx)
         }else{
             ret = await model[clt][method](id,item,ctx)
+        }
+        if(clt == 'User'){
+          UserMessage.msg(ret.cnum)
         }
         delete ret.qtext
         delete ret.valid
