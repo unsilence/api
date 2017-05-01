@@ -36,7 +36,7 @@ app.use(async (ctx, next) => {
 
 app.use(require('./auth').middle)
 //特殊接口 ...
-const UserMessage = require('./message/lib/user')
+const UserMessage = require('./msg/lib/user')
 app.use(async (ctx,next) => {
     let urls = ctx.path.split('/')
     let clt = urls[1] || 'Color'
@@ -73,7 +73,7 @@ app.use(async (ctx,next) => {
     }
 });
 
-const message = require('./message')
+const message = require('./msg')
 
 var server = require('http').createServer(app.callback());
 var io = require('socket.io')(server);

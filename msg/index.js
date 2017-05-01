@@ -24,7 +24,6 @@ let ACTIONS = {}
 // })
 let IO
 let tokens = exports.tokens = {}
-
 exports.bind = (io)=>{
   IO = exports.IO = io
   io.on('connection',(socket)=>{
@@ -33,10 +32,5 @@ exports.bind = (io)=>{
         console.log('message::login',token,socket.id)
         tokens[token]=socket
       })
-      socket.on('modify', function(msg){
-        console.log('message:',msg)
-        //io.sockets.socket(socketid).emit(‘String’, data);
-        io.emit('user', msg);
-      });
   })
 }
