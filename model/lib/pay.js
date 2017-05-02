@@ -5,6 +5,10 @@ var Base = require('./_base')
 // 付款  由财务部向供应商付款  按 parchase进行付款 ：】
 var keys = exports.keys = Object.assign({},Base.keys,{
 
+  customer_num: {
+      type: String,
+      default: ''
+  },
     purchase_num: {
         type: String,
         default: ''

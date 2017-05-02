@@ -48,6 +48,10 @@ var keys = exports.keys = Object.assign({},Base.keys,{
             type: String,
             default: ''
         },
+        role_data: {
+            type: String,
+            default: ''
+        },
         note: {
             type: String,
             default: ''
