@@ -3,128 +3,52 @@ var _ = require('underscore')
 var Base = require('./_base')
 
 var keys = exports.keys = Object.assign({}, Base.keys, {
-    takeNum: {
-        type: String, //提货单号
-        default: ''
-    },
-    by: {
-        type: String,
-        default: '' //采购专员
-    },
-    planArriveAt: {
-        type: String, //计划到货日期
-        default: ''
-    },
-    currency_num: {
-        type: String, //币种
-        default: ''
-    },
-    note: {
-        type: String,
-        default: '' //备注
-    },
-    status: {
-        type: String,
-        enum: [
-            'waitAudit', 'waitInput', 'inStock'
-        ], //
-        default: '' //备注
-    },
+    take_num: { type: String,default: ''} , //提货单号
+    purchase_user: { type: String,default: ''} , //采购专员
+    purchase_master: { type: String,default: ''} , //采购专员
+    plan_arrive_at: { type: String,default: ''} ,  //计划到货日期
+    currency_num: { type: String,default: ''} , //币种
     orders: {
         type: [
             {
-                orderNum: {
-                    type: String,
-                    default: ''
-                },
+                customer_num: { type: String,default: ''},
+                order_num: { type: String,default: ''},
+                contract_num : { type: String,default: ''}, //保存 合同号
+                order_type: { type: String,default: ''}, // 订单类型 期货 or 现货   【仅限财务系统显示】
+                project_master: { type: String,default: ''}, //项目主管 【仅限财务系统显示】
+                depart_master: { type: String,default: ''}, //项目部经理 【仅限财务系统显示】
+                money:{type: String,default: ''},//订单金额 【仅限财务系统显示】
+                real_discount:{type: String,default: ''},//实际折扣 【仅限财务系统显示】
+                ag_discount:{type: String,default: ''},//基准折扣 【仅限财务系统显示】
+                standard_discount:{type: String,default: ''},//标准折扣 【仅限财务系统显示】
+                real_reward:{type: String,default: ''},//事件利润率 【仅限财务系统显示】
+                order_at:{type: String,default: ''},//下单日期
                 stocks:{
                     type:[{
-                      stock_num:{
-                          type: String,
-                          default: ''
-                      },
-                      status: {
-                          type: String,
-                          enum: [
-                              'waitAudit', 'waitInput', 'inStock' // .. 未入库  已入库
-                          ], //
-                          default: '' //备注
-                      },
-                      buyAt:{
-                          type: String,
-                          default: ''
-                      },
-                      planArriveAt:{
-                        type: String,
-                        default: ''
-                      },
-                      state: {
-                          type: String,
-                          default: ''
-                      }, //货品状态
-                      productIdentity: {
-                          type: String,
-                          default: ''
-                      }, // PI
-                      productNum: {
-                          type: String,
-                          default: ''
-                      }, //产品型号
-                      productName: {
-                          type: String,
-                          default: ''
-                      }, //产品名称
-                      productCount: {
-                          type: String,
-                          default: ''
-                      }, //产品数量
-                      productPrice: {
-                          type: String,
-                          default: ''
-                      }, //采购金额（原币）
-                      currencyRate: {
-                          type: String,
-                          default: ''
-                      }, //计划汇率
+                      stock_num:{type: String,default: ''},
+                      status: {type: String,enum: ['waitAudit', 'waitInput', 'inStock'],default: ''}, //物流状态
+                      state: {type: String,enum: ['good', 'bad'],default: ''}, //到货后的货品状态 完整 or 有损
+                      product_identity: {type: String,default: ''}, // PI
+                      product_num: {type: String,default: ''}, //产品型号
+                      product_name: {type: String,default: ''}, //产品名称
+                      product_quantity: {type: String,default: ''}, //产品数量
+                      product_price:{type: String,default: ''}, //采购金额（原币）
+                      currency_rate:{type: String,default: ''},//计划汇率
                       components: {
                           type: [
                               {
-                                  componentNum: {
-                                      type: String,
-                                      default: ''
-                                  },
-                                  quantity: {
-                                      type: String,
-                                      default: ''
-                                  },
-                                  suitcaseNum: {
-                                      type: String,
-                                      default: ''
-                                  }, //提箱单号
-                                  boxOrderNum: {
-                                      type: String,
-                                      default: ''
-                                  }, //箱单号
-                                  boxNum: {
-                                      type: String,
-                                      default: ''
-                                  }, //箱号
-                                  boxCount: {
-                                      type: Number,
-                                      default: 0
-                                  } //箱数
+                                  component_num: {type: String,default: ''}, //组件名字
+                                  component_quantity: {type: String,default: ''}, //组件数量
+                                  suitcase_num: {type: String,default: ''}, //提箱单号
+                                  box_order_num:{type: String,default: ''},//箱单号
+                                  box_num: {type: String,default: ''}, //箱号
+                                  box_quantity: {type: String,default: ''} //箱数
                               }
                           ],
                           default: []
                       },
-                      supplierName: {
-                          type: String,
-                          default: ''
-                      }, //供应商名称
-                      brandName: {
-                          type: String,
-                          default: ''
-                      }, //品牌
+                      supplier_name: {type: String,default: ''}, //供应商名称
+                      brand_name: {type: String,default: ''}, //品牌
 
                     }],
                     default:[]

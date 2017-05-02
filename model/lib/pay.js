@@ -2,17 +2,13 @@
 var _ = require('underscore')
 var Base = require('./_base')
 
-// 付款  由财务部向供应商付款
+// 付款  由财务部向供应商付款  按 parchase进行付款 ：】
 var keys = exports.keys = Object.assign({},Base.keys,{
 
-    orders: {type:[{
-        order_num: {
-            type: String,
-            default: ''
-        }
-      }],default:[]}
-      ,
-
+    purchase_num: {
+        type: String,
+        default: ''
+    },
     note: {
         type: String,
         default: ''
@@ -39,8 +35,8 @@ var keys = exports.keys = Object.assign({},Base.keys,{
             default: ''
         }
     }],default:[]},
-    
-    order_num : {
+
+    order_num : {  //销售协议号
         type: String,
         default: ''
     },
