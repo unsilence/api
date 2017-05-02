@@ -4,8 +4,11 @@ var Base = require('./_base')
 
 // 供货商  代替原来的品牌 品牌意思太单薄了
 var keys = exports.keys = Object.assign({},Base.keys,{
-
-        name: { //名字 如 品牌名
+        brand_name:{
+          type: String, // 品牌名字
+          default: ''
+        },
+        name: { //生产商名字
             type: String,
             default: ''
         },
