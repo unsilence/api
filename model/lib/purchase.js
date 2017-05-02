@@ -3,6 +3,7 @@ var _ = require('underscore')
 var Base = require('./_base')
 
 var keys = exports.keys = Object.assign({}, Base.keys, {
+    status: {type: String,enum: ['inPurchase', 'inPay', 'inStock','finish'],default: 'inPurchase'}, //等待提交财务，正在付款，已到货，已送货安装
     take_num: { type: String,default: ''} , //提货单号
     purchase_user: { type: String,default: ''} , //采购专员
     purchase_master: { type: String,default: ''} , //采购专员
