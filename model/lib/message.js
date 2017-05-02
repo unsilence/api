@@ -3,6 +3,10 @@ var _ = require('underscore')
 var Base = require('./_base')
 
 var keys = exports.keys = Object.assign({},Base.keys,{
+      user_num: {
+          type: String,
+          default: ''
+      },
       clt_name : {type: String,default: ''},
       record_num: {type: String,default: ''},
       action : {type: String,default: ''},

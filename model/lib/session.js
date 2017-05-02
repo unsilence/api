@@ -7,6 +7,10 @@ var keys = exports.keys = Object.assign({},Base.keys,{
             type: String,
             default: ''
         },
+        user_num: {
+            type: String,
+            default: ''
+        },
         data: {
             type: String,
             default: ''

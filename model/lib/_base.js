@@ -6,6 +6,7 @@ var model = require( '../index')
 var _ = require( 'underscore')
 
 var keys = exports.keys  = {
+    note:{type:String,default:''},
     qtext:{type:String,default:''},
     valid:{type: Boolean,default:true},
     updateAt:{type:Date,default: Date.now()},

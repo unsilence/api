@@ -4,14 +4,15 @@ var Base = require('./_base')
 
 // 设计师为顾客下的订单 可以是现货单 也可以是采购单  又可能财务角色 或者 采购角色代劳
 var keys = exports.keys =Object.assign({},Base.keys,{
-  customer_contract: { // 客户合同号
+  off_num: { // 线下的合同号
       type: String,
       default: ''
   },
-  purchase_ByUser: { // 订单管理员
+  customer_num: {
       type: String,
       default: ''
   },
+  plan_arrive_at: { type: String,default: ''} ,  //计划到货日期
   products: { //商品SKU清单
       type: [
           {
@@ -81,5 +82,5 @@ var keys = exports.keys =Object.assign({},Base.keys,{
   }
 })
 
-exports.PRE = 'OD'
+exports.PRE = 'CO'
 Base._getThis(exports,keys,__filename)

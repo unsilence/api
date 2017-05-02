@@ -9,7 +9,7 @@ var keys = exports.keys = Object.assign({},Base.keys,{
         type: String,
         default: ''
     },
-    note: {
+    contract_num : {  //销售合同号
         type: String,
         default: ''
     },
@@ -17,15 +17,15 @@ var keys = exports.keys = Object.assign({},Base.keys,{
         type: String,
         default: ''
     },
-    cut_payment:{
+    cut_payment:{ //厂家扣款
         type: String,
         default: ''
     },
-    origin_sum : {
+    origin_sum : { // 原价
         type: String,
         default: ''
     },
-    origin_sum_history :{type:[{
+    origin_sum_history :{type:[{ //原价历史纪录
         origin_sum: {
             type: String,
             default: ''
@@ -36,10 +36,7 @@ var keys = exports.keys = Object.assign({},Base.keys,{
         }
     }],default:[]},
 
-    order_num : {  //销售协议号
-        type: String,
-        default: ''
-    },
+
     batch:{type:[{
         origin_money: {
             type: String,

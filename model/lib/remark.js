@@ -4,7 +4,10 @@ var Base = require('./_base')
 
 //收款
 var keys = exports.keys = Object.assign({},Base.keys,{
-
+    user_num: {
+        type: String,
+        default: ''
+    },
     record_num: {
         type: String,
         default: ''
