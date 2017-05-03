@@ -7,7 +7,7 @@ var tables = exports.tables  = {
   'Currency':{read:'all',write:'all'},
   'Customer':{read:'all',write:'all'},
   'Input':{read:'all',write:'all'},
-  'Order':{read:'all',write:'all'},
+  'Contract':{read:'all',write:'all'},
   'Output':{read:'all',write:'all'},
   'Pay':{read:'all',write:'all'},
   'Product':{read:'all',write:'all'},
@@ -20,6 +20,7 @@ var tables = exports.tables  = {
   'Supplier':{read:'all',write:'all'},
   'User':{read:'all',write:'all'},
   'Warehouse':{read:'all',write:'all'},
+  'Message':{read:'all',write:'all'},
 }
 
 const modifyActions = {updateById:1,addItem:1,deleteById:1}

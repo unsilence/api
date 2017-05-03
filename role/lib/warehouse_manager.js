@@ -8,6 +8,28 @@ tables.Customer={read:'all',write:'self'}
 tables.Order={read:'all',write:'self'}
 tables.Stock={read:'all',write:'all'}
 
+tables = exports.tables  = {
+  'Component':{read:'all',write:'all'},
+  'Currency':{read:'all',write:'all'},
+  'Customer':{read:'all',write:'all'},
+  'Input':{read:'all',write:'all'},
+  'Contract':{read:'all',write:'all'},
+  'Output':{read:'all',write:'all'},
+  'Pay':{read:'all',write:'all'},
+  'Product':{read:'all',write:'all'},
+  'Proposal':{read:'all',write:'all'},
+  'Purchase':{read:'all',write:'all'},
+  'Receive':{read:'all',write:'all'},
+  'Remark':{read:'all',write:'all'},
+  'Session':{read:'all',write:'all'},
+  'Stock':{read:'all',write:'all'},
+  'Supplier':{read:'all',write:'all'},
+  'User':{read:'all',write:'all'},
+  'Warehouse':{read:'all',write:'all'},
+  'Message':{read:'all',write:'all'},
+}
+
+
 const modifyActions = {updateById:1,addItem:1,deleteById:1}
 var check = exports.check =  async (ctx, next) => {
   let urls = ctx.path.split('/')

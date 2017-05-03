@@ -54,9 +54,12 @@ app.use(async (ctx,next) => {
         if(clt == 'User'){
           UserMessage.msg(ret.cnum)
         }
-        delete ret.qtext
-        delete ret.valid
-        delete ret.lastModifyByUser
+        if(ret){
+          delete ret.qtext
+          delete ret.valid
+          delete ret.lastModifyByUser
+        }
+
         ctx.body = {status:'success',msg:'hello world!',data:{item:ret}}
     }else{
         console.log('ctx.isAll',ctx.isAll)
@@ -79,7 +82,7 @@ var server = require('http').createServer(app.callback());
 var io = require('socket.io')(server);
 message.bind(io)
 
-const port = 88
+const port = 80
 console.log('port:',port)
 
 server.listen(port);

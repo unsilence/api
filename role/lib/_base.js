@@ -20,6 +20,6 @@ var tables = exports.tables  = {
   'Stock':{read:'all',write:'self'},
   'Supplier':{read:'all',write:'self'},
   'User':{read:'self',write:'self'},
+  'Contract':{read:'self',write:'self'},
   'Warehouse':{read:'all',write:'self'},
 }
- 
