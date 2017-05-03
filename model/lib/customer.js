@@ -61,6 +61,10 @@ var keys = exports.keys = Object.assign({},Base.keys,{
             type: String,
             default: ''
         },
+        user_num: { // 设计师的用户编号
+            type: String,
+            default: ''
+        },
         center_master: {
             type: String,
             default: ''
