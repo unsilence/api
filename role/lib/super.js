@@ -1,53 +1,56 @@
 "use strict"
 var _ = require( 'underscore');
-var _base = require('./_base');
 
-var tables = exports.tables  = {
-  'Component':{read:'all',write:'all'},
-  'Currency':{read:'all',write:'all'},
-  'Customer':{read:'all',write:'all'},
-  'Input':{read:'all',write:'all'},
-  'Contract':{read:'all',write:'all'},
-  'Output':{read:'all',write:'all'},
-  'Pay':{read:'all',write:'all'},
-  'Product':{read:'all',write:'all'},
-  'Proposal':{read:'all',write:'all'},
-  'Purchase':{read:'all',write:'all'},
-  'Receive':{read:'all',write:'all'},
-  'Remark':{read:'all',write:'all'},
-  'Session':{read:'all',write:'all'},
-  'Stock':{read:'all',write:'all'},
-  'Supplier':{read:'all',write:'all'},
-  'User':{read:'all',write:'all'},
-  'Warehouse':{read:'all',write:'all'},
-  'Message':{read:'all',write:'all'},
+//
+// Contract
+// Currency
+// Customer
+// Input
+// Message
+// Output
+// Pay
+// Product
+// Proposal
+// Purchase
+// Receive
+// Remark
+// Session
+// Stock
+// Supplier
+// User
+// Warehouse
+//
+// getById
+// getByNum
+// deleteById
+// deleteByNum
+// updateById
+// updateByNum
+// fetch
+// addItem
+const collections = {
+  Component:{getById:()=>[true,{}],
+            getByNum:()=>[true,{}],
+            fetch:()=>[true,{}]}
+  ,Product:{getById:()=>[true,{}],
+            getByNum:()=>[true,{}],
+            fetch:()=>[true,{}]}
+ ,Supplier:{getById:()=>[true,{}],
+           getByNum:()=>[true,{}],
+           fetch:()=>[true,{}]}
+ ,Warehouse:{getById:()=>[true,{}],
+           getByNum:()=>[true,{}],
+           fetch:()=>[true,{}]}
+ ,Remark:{getById:()=>[true,{}],
+           getByNum:()=>[true,{}],
+           fetch:()=>[true,{}],
+         addItem:()=>[true,{}]}
 }
-
-const modifyActions = {updateById:1,addItem:1,deleteById:1}
-var check = exports.check =  async (ctx, next) => {
-  let urls = ctx.path.split('/')
-  let clt = urls[1] || 'file'
-  let action = urls[2] || ''
-  console.log(' in super')
-  if(clt in tables){
-    if(action in modifyActions){ //是否是写操作
-      if(tables[clt].write == 'all'){
-        ctx.isAll = true
-        return true
-      }else {
-        ctx.isAll = true
-        return true //这里要补加 过滤只改自己的
-      }
-    }else{ //读操作
-      if(tables[clt].read == 'all'){
-        ctx.isAll = true
-        return true
-      }else {
-        ctx.isAll = true
-        return true //这里要补加 过滤只读自己的
-      }
+var check = exports.check =  async (colName, action,currentUser) => {
+    return [true,{}]
+    if(colName in collections && action in collections[colName]){
+      return await collections[colName][action](currentUser)
+    }else{
+      return [false,{status:'youcan not'}]
     }
-  }
-
-  return false
 }
