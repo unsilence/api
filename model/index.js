@@ -73,3 +73,6 @@ exports.fileRead = strmd5 =>{
         })
     }).catch(e=>console.log(e))
 }
+
+
+console.log('_base dir',require('./lib/_base'))

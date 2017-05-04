@@ -29,9 +29,20 @@ exports.middle = async (ctx, next) => {
         let session = ctx.sessionData
         console.log('check role',session.user.role)
         let rl = roles[session.user.role||'designer']
-        let s = await rl.check(ctx)
-        console.log('role check result:',s)
-        return  s
+        //1 检查是否可以
+        //2 数据是否需要过滤
+        let urls = ctx.path.split('/')
+        let colName = urls[1] || 'test---'
+        let action = urls[2] || '---'
+        let [can,auth_filter] =  await rl.check(colName,action,ctx.sessionData.user)
+        console.log('role check:',{can,auth_filter})
+        if(!can){
+          ctx.body = { status:'wrong',msg:"数据不存在或者权限不够" };
+          ctx.status = 500;
+        }else{
+          ctx.auth_filter = auth_filter
+          await next()
+        }
     } catch (err) {
         console.log(err)
         ctx.body = { message: err.message };

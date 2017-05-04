@@ -1,88 +1,181 @@
 "use strict"
+const getRawBody = require('./raw')
+const colors = require('colors');
+colors.setTheme({silly: 'rainbow',input: 'grey',verbose: 'cyan',prompt: 'red',
+              info: 'green',data: 'blue',help: 'cyan',warn: 'yellow',debug: 'magenta',error: 'red'});
 
-var koa = require('koa');
-var app = new koa();
-var getRawBody = require('./raw')
-var model =  require('./model')
-var authMiddle = require('./auth')
-var fileMiddle = require('./file')
+//加载配置文件
+const config = require('../im_config.json')
 
-var body = require('koa-better-body')
+//初始化数据库模块和连接数据库
+const model =  require('./model')
+model.connect(config.dbstr)
 
-model.connect('mongodb://localhost:27017/im_dev')
-//文件处理
-// app.use(body())
+
+const app = new (require('koa'))();
+
+//接收上传的文件存储到gridfs 返回对应md5 ,和 根据md5 获得对应的文件 图片统一按png格式处理
+app.use(require('./file').middle)
+//加载『导出数据』的机制
 app.use(require('./export').middle)
 
-app.use(fileMiddle.middle)
+const isJSON = str=>{
+  try {
+      JSON.parse(str);
+  } catch (e) {
+      return false;
+  }
+  return true;
+}
 
-
-
+//接受和返回只接受json格式 请求参数统一放到post里
 app.use(async (ctx, next) => {
     try {
         const buf = await getRawBody(ctx.req)
-        ctx.rawBody = buf.toString()
-        console.log('--',new Date(),ctx.path,'\nrequest::json\n',ctx.rawBody)
-        await next()
-        console.log('response::json\n',ctx.body)
+        ctx.rawBody = buf.toString() || '{}'
+        console.info(`${new Date()} ${ctx.path} >>>>>>>>>>>>>>>>>>>>>>>> `.debug)
+        console.info(`post:,${ctx.rawBody}`.debug)
+        if(!isJSON(ctx.rawBody)){
+          ctx.status =  500;
+          ctx.body = { message: '请求格式有误：仅限JSON格式' };
+          console.info(`请求格式有误：仅限JSON格式`.error)
+        }else{
+          await next()
+          console.info(`${new Date()} ${ctx.path} <<<<<<<<<<<<<<<<<<<<<<<< `.info)
+          console.info(`response:,${JSON.stringify(ctx.body).slice(0,100)}`.info)
+        }
+
     } catch (err) {
-        console.log(err)
-        ctx.body = { message: err.message };
+        console.log(`${err}`.error)
         ctx.status = err.status || 500;
+        ctx.body = { message: err.message };
     }
 })
-//访问权限
 
-
+//用户注册登录相关
 app.use(require('./auth').middle)
-//特殊接口 ...
-const UserMessage = require('./msg/lib/user')
+
+//权限和数据过滤 分角色(带有参数 )
+app.use(require('./role').middle)
+
+
+
+//加载【消息框架】
+// const UserMessage = require('./msg/lib/user')
+// if(clt == 'User'){
+//   UserMessage.msg(ret.cnum)
+// }
+const message = require('./msg')
+app.use(message.middle)
+
+//加载 【业务日志框架】
+
+
 app.use(async (ctx,next) => {
     let urls = ctx.path.split('/')
-    let clt = urls[1] || 'Color'
-    let method = urls[2] || 'fetch'
+    let clt = urls[1] || 'null'
+    let method = urls[2] || 'null'
     let {id,filter,limit,startPos,orderBy,item,cnum} = JSON.parse(ctx.rawBody)
     console.log(clt,method,{id,filter,limit,startPos,orderBy})
-    filter = filter || {}
-    if((method === 'addItem' || method.endsWith('Num')  || method.endsWith('ById')) && clt in model &&  method in model[clt]){
-        let ret
-        if(method.endsWith('Num')){
-            ret = await model[clt][method](cnum,ctx)
-        }else{
-            ret = await model[clt][method](id,item,ctx)
-        }
-        if(clt == 'User'){
-          UserMessage.msg(ret.cnum)
-        }
-        if(ret){
-          delete ret.qtext
-          delete ret.valid
-          delete ret.lastModifyByUser
-        }
-
-        ctx.body = {status:'success',msg:'hello world!',data:{item:ret}}
+    let retItem,retList;
+    if(!(clt in model)){
+      ctx.status =  500;
+      ctx.body = { message: '所请求的数据集合不存在' };
+      console.info(`所请求的数据不存在`.error)
     }else{
-        console.log('ctx.isAll',ctx.isAll)
-        if(ctx.isAll !== true){
-          filter.ownByUser = ctx.sessionData.user.cnum
-        }
-        let {list,count} = await model[clt][method](filter,orderBy,limit,startPos)
-        list.map(d=>{
-          delete d.qtext
-          delete d.valid
-          delete d.lastModifyByUser
-        })
-        ctx.body = {status:'success',msg:'hello world!',data:{list,count}}
+      let table = model[clt]
+      switch (method) {
+        case 'getById':
+          filter = {_id:id}
+          if('auth_filter' in ctx){
+            filter = Object.assign(filter,ctx.auth_filter)
+          }
+          retItem = await table.getById(filter)
+          ctx.body = {status:'success',data:{item:retItem}}
+          break;
+        case 'getByNum':
+          filter = {cnum}
+          if('auth_filter' in ctx){
+            filter = Object.assign(filter,ctx.auth_filter)
+          }
+          retItem = await table.getByNum(filter)
+
+          ctx.body = {status:'success',data:{item:retItem}}
+          break;
+        case 'deleteById':
+          filter = {_id:id}
+          if('auth_filter' in ctx){
+            filter = Object.assign(filter,ctx.auth_filter)
+          }
+          item = {lastModifyByUser:ctx.sessionData.user.cnum}
+          retItem = await table.deleteById(filter,item)
+          ctx.body = {status:'success',data:{item:retItem}}
+          break;
+        case 'deleteByNum':
+          filter = {cnum}
+          if('auth_filter' in ctx){
+            filter = Object.assign(filter,ctx.auth_filter)
+          }
+          item = {lastModifyByUser:ctx.sessionData.user.cnum}
+          retItem = await table.deleteByNum(filter,item)
+          ctx.body = {status:'success',data:{item:retItem}}
+          break;
+        case 'updateById':
+          filter = {_id:id}
+          if('auth_filter' in ctx){
+            filter = Object.assign(filter,ctx.auth_filter)
+          }
+          item.lastModifyByUser = ctx.sessionData.user.cnum
+          retItem = await table.updateById(filter,item)
+          ctx.body = {status:'success',data:{item:retItem}}
+          break;
+        case 'updateByNum':
+          filter = {cnum}
+          if('auth_filter' in ctx){
+            filter = Object.assign(filter,ctx.auth_filter)
+          }
+          item.lastModifyByUser = ctx.sessionData.user.cnum
+          retItem = await table.updateByNum(filter,item)
+          ctx.body = {status:'success',data:{item:retItem}}
+          break;
+        case 'fetch':
+          if('auth_filter' in ctx){
+            filter = Object.assign(filter||{},ctx.auth_filter)
+          }
+          retList = await table.fetch(filter,orderBy,limit,startPos)
+          ctx.body = {status:'success',data:retList}
+          break;
+        case 'addItem':
+          item.ownByUser = ctx.sessionData.user.cnum
+          item.lastModifyByUser = ctx.sessionData.user.cnum
+          retItem = await table.addItem(item)
+          ctx.body = {status:'success',data:{item:retItem}}
+          break;
+        default:
+          ctx.status =  500;
+          ctx.body = { message: '所请求的接口不存在' };
+          console.info(`所请求的数据不存在`.error)
+      }
+      cleanItem(retItem)
+      if(retList){retList.list.map(d=>cleanItem(d))}
+
     }
+
 });
 
-const message = require('./msg')
+const cleanItem = (item)=>{
+  if(item){
+    delete item.qtext
+    delete item.valid
+    delete item.lastModifyByUser
+    delete item.ownByUser
+  }
+}
 
-var server = require('http').createServer(app.callback());
-var io = require('socket.io')(server);
+
+const server = require('http').createServer(app.callback());
+const io = require('socket.io')(server);
 message.bind(io)
 
-const port = 88
-console.log('port:',port)
-
-server.listen(port);
+console.log('port:',config.port)
+server.listen(config.port);

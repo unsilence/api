@@ -35,3 +35,7 @@ exports.bind = (io)=>{
       })
   })
 }
+
+exports.middle = async (ctx, next) => {
+    await next()
+}
