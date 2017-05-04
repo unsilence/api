@@ -125,7 +125,7 @@ const updateByNum = exports.updateByNum = async(ithis,flt,options)=>{
     return await updateOne(ithis,flt,options)
 }
 const fetch = exports. fetch = (ithis,filter,orderBy,limit,startPos)=>{
-    console.log(`model:: ${ithis.collectionName} updateByNum`,filter,orderBy,limit,startPos)
+    console.log(`model:: ${ithis.collectionName} fetch`,filter,orderBy,limit,startPos)
     filter = filter || {}
     orderBy = orderBy || {createAt:-1}
     limit   = limit || 10

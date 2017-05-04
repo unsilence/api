@@ -148,8 +148,13 @@ app.use(async (ctx,next) => {
         case 'addItem':
           item.ownByUser = ctx.sessionData.user.cnum
           item.lastModifyByUser = ctx.sessionData.user.cnum
-          retItem = await table.addItem(item)
-          ctx.body = {status:'success',data:{item:retItem}}
+          if('auth_filter' in ctx && ctx.auth_filter(item)){
+            retItem = await table.addItem(item)
+            ctx.body = {status:'success',data:{item:retItem}}
+          }else{
+            ctx.status =  500;
+            ctx.body = {status:'wrong',data:'你无权这样添加信息'}
+          }
           break;
         default:
           ctx.status =  500;
