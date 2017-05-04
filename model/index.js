@@ -19,7 +19,7 @@ let _dict = {}
 let namelist = fileList.map(v=>path.basename(v))
     .filter(v=>!v.startsWith('_')).map(v=>{
     var d = require('./lib/'+v)
-    console.log('model::',d.modelName,d)
+    console.log('model::',d.modelName)
     exports[d.modelName] = d
 })
 

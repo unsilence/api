@@ -16,12 +16,13 @@ function walk(p) {
 let fileList = []
 walk(path.join(__dirname, 'lib'))
 let ACTIONS = {}
-// let namelist = fileList.map(v=>path.basename(v))
-//     .filter(v=>!v.startsWith('_')).map(v=>{
-//     var d = require('./lib/'+v)
-//     console.log('role::',v,d)
-//     exports[v.split('.')[0]] = ACTIONS[v.split('.')[0]] = d.middle
-// })
+let namelist = fileList.map(v=>path.basename(v))
+    .filter(v=>!v.startsWith('_')).map(v=>{
+    var d = require('./lib/'+v)
+    let msgName = v.split('.')[0]
+    console.log('msg::',msgName)
+    exports[msgName] = ACTIONS[v.split('.')[0]] = d.middle
+})
 let IO
 let tokens = exports.tokens = {}
 exports.bind = (io)=>{

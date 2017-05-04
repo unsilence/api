@@ -19,8 +19,9 @@ let ACTIONS = {}
 let namelist = fileList.map(v=>path.basename(v))
     .filter(v=>!v.startsWith('_')).map(v=>{
     var d = require('./lib/'+v)
-    console.log('role::',v,d)
-    exports[v.split('.')[0]] = ACTIONS[v.split('.')[0]] = d.middle
+    let exportName = v.split('.')[0]
+    console.log('export::',exportName)
+    exports[exportName] = ACTIONS[v.split('.')[0]] = d.middle
 })
 
 exports.middle = async (ctx, next) => {
