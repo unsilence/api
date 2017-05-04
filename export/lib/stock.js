@@ -38,7 +38,7 @@ const buffer2resize = (buf,nname)=>{
 	})
 }
 exports.middle = async (ctx, next) => {
-	let item = await model.Session.getById(ctx.query.token)
+	let item = await model.Session.getById({_id:ctx.query.token})
 	let sessionData
 	if(item){
 			sessionData = Object.assign({},JSON.parse(item.data))
