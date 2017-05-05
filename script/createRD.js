@@ -14,15 +14,8 @@ tables.map(k=>{
 })
 console.log('tables:',tablesMap)
 
-
-let comkeys = {
-    qtext:{type:String,default:''},
-    valid:{type: Boolean,default:true},
-    updateAt:{type:Date,default: Date.now()},
-    createAt:{type:Date,default: Date.now()},
-    createByUser:{type:String,default:''},
-    lastModifyByUser:{type:String,default:''}
-}
+const model_base = require('../model/lib/_base')
+let comkeys = model_base.keys
 
 let str = `
 digraph structs {

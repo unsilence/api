@@ -7,12 +7,11 @@ var _ = require( 'underscore')
 
 const keys = exports.keys  = {
     note:{type:String,default:''},
-    qtext:{type:String,default:''},
     valid:{type: Boolean,default:true},
-    updateAt:{type:Date,default: Date.now()},
-    createAt:{type:Date,default: Date.now()},
-    ownByUser:{type:String,default:''},
-    lastModifyByUser:{type:String,default:''}
+    update_at:{type:Date,default: Date.now()},
+    create_at:{type:Date,default: Date.now()},
+    create_by_user:{type:String,default:''},
+    last_modify_by_user:{type:String,default:''}
 }
 
 const typeEnsure = (tp,v)=>{

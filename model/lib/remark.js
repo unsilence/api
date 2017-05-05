@@ -3,20 +3,20 @@ var _ = require('underscore')
 var Base = require('./_base')
 
 //收款
-var keys = exports.keys = Object.assign({},Base.keys,{
-    user_num: {
-        type: String,
-        default: ''
-    },
-    record_num: {
-        type: String,
-        default: ''
-    },
-    msg: {
-        type: String,
-        default: ''
-    }
+var keys = exports.keys = Object.assign({}, Base.keys, {
+  user_num: {
+    type: String,
+    default: ''
+  },
+  record_num: {
+    type: String,
+    default: ''
+  },
+  msg: {
+    type: String,
+    default: ''
+  }
 
-    })
-exports. PRE = 'RM'
-Base._getThis(exports,keys,__filename)
+})
+exports.PRE = 'RM'
+Base._getThis(exports, keys, __filename)

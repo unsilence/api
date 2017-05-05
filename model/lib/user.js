@@ -52,10 +52,7 @@ var keys = exports.keys = Object.assign({},Base.keys,{
             type: String,
             default: ''
         },
-        note: {
-            type: String,
-            default: ''
-        },
+
         status: {
             type: String,
             enum: ['enable', 'disabled'],
