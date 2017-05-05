@@ -19,13 +19,35 @@ let comkeys = model_base.keys
 
 let str = `
 digraph structs {
-    node [shape=record,fontsize = 10, color="skyblue"];
+    node [shape=record,fontsize = 10, color="grey"];
 `
+
+let _type = (key,t) =>{
+    if(_.isArray(t) && _.isObject(t[0])){
+      return `{ <f_${key}>${key} | { ${ _.keys(t[0]).map(k=>_type(k,t[0][k].type)).join('|') }}} `
+    }
+    return `<f_${key}>${key} `
+}
+
+let _fetch = (clt,key)=>{
+  clt = clt.toLowerCase()
+  let clts = _.keys(model).filter(c=>c.toLowerCase() == clt)
+  console.log('clts',clt,key,clts.length)
+  if(clts.length == 1 && key != 'cnum'){
+    clt = model[clts[0]]
+    console.log('fetch',clt,key,clts[0].keys)
+    if(_.isArray(clt.keys[key].type) && _.isObject(clt.keys[key].type[0])){
+      return `| ${_type(key,clt.keys[key].type)}`
+    }
+  }
+  return `|<f_${key}>${key}`
+}
 tables.map(schema=>{
     let cols = tablesMap[schema].filter(v=>!(v in comkeys))
     let _s = ''
     cols.map(v=>{
-       _s = _s + `|<f_${v}>${v} `
+      // model
+       _s = _s + _fetch(schema,v)
     })
     str = str + ` struct_${schema.toLowerCase()} [shape=record,label="{<f0> [${schema}] ${_s}}"];
   `
@@ -72,5 +94,5 @@ console.log('tmp save',_f)
 var sys = require('sys')
 var exec = require('child_process').exec;
 function puts(error, stdout, stderr) { sys.puts(stdout) }
-console.log("dot "+_f+" -Kdot  -Tpng  -o rd-"+Date.now()+".png")
-exec("dot "+_f+" -Kdot  -Tpng  -o rd-"+Date.now()+".png", puts);
+console.log("dot "+_f+" -Kdot  -Tpng  -o rd-im.png")
+exec("dot "+_f+" -Kdot  -Tpng  -o rd-im.png", puts);
