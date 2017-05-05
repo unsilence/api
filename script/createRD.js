@@ -54,7 +54,10 @@ tables.map(schema=>{
 })
 let stables = {}
 tables.map(i=>stables[i.toLowerCase()]=1)
-
+let colors = ['gold4','crimson','dodgerblue4','darkviolet','chartreuse']
+let _color = ()=>{
+  return colors[parseInt(Math.random(1)*100%5)]
+}
 console.log('stables',stables)
 tables.map(schema=>{
     console.log('check',schema)
@@ -71,7 +74,7 @@ tables.map(schema=>{
 
         console.log('check',schema,v,{toSchema},toSchema in stables)
         if(toSchema in stables){
-          let c = v.endsWith('s')? '[color="blue"]' : ''
+          let c = v.endsWith('s')? '[color="'+_color()+'"]' : ''
           str = str +`struct_${fromSchema}:f_${v} -> struct_${toSchema}:f_id ${c};
   `
         }
