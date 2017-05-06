@@ -135,7 +135,8 @@ const fetch = exports. fetch = (ithis,filter,orderBy,limit,startPos)=>{
         let clt = model.getDb().collection(ithis.collectionName+'s')
         let list
         clt.find(filter,{sort:{_id:-1},skip:startPos,limit:limit}).toArray(function(err,doc){
-            // console.log({err})
+            if(err)
+              console.log({err})
             list = JSON.parse(JSON.stringify(doc))
             clt.count(filter,function(err,count){
                 resolve({list,count})

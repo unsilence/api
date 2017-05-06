@@ -3,11 +3,11 @@ var _ = require( 'underscore');
 
 const _check = user=>{
   let brands = JSON.parse(user.role_data||'{"test":1}')
-  return [true,{supplier_num:{$in:brands}}]
+  return [true,{brand_num:{$in:_.keys(brands)}}]
 }
 const _add_check = user=>{
   let brands = JSON.parse(user.role_data||'{"test":1}')
-  return [true,item=>item.supplier_num in brands]
+  return [true,item=>item.brand_num in brands]
 }
 const collections = {
   // 需要品牌权限过滤
