@@ -76,8 +76,9 @@ const deleteOne =  (ithis,flt,options)=>{
         let clt = model.getDb().collection(ithis.collectionName+'s')
         flt.valid = true
         if('_id' in flt) { flt._id = new ObjectID(flt._id)}
+        options = options||{}
         options.valid = false
-        options.updateAt = new Date()
+        options.update_at = new Date()
         clt.findOneAndUpdate(flt,
                             {$set:options},
                             {returnOriginal:false},
@@ -99,7 +100,7 @@ const updateOne =  (ithis,flt,options) =>{
     return new Promise((resolve,reject)=>{
         let clt = model.getDb().collection(ithis.collectionName+'s')
         //更改项预处理
-        let newValues={updateAt:new Date()}
+        let newValues={update_at:new Date()}
         Object.keys(ithis.keys).filter(k=>k in options).map(k=>{
             let coltype = ithis.keys[k]
             newValues[k] =typeEnsure(coltype,options[k])
@@ -126,7 +127,7 @@ const updateByNum = exports.updateByNum = async(ithis,flt,options)=>{
 const fetch = exports. fetch = (ithis,filter,orderBy,limit,startPos)=>{
     console.log(`model:: ${ithis.collectionName} fetch`,filter,orderBy,limit,startPos)
     filter = filter || {}
-    orderBy = orderBy || {createAt:-1}
+    orderBy = orderBy || {create_at:-1}
     limit   = limit || 10
     startPos= startPos || 0
     filter.valid = true
@@ -167,7 +168,7 @@ const fetch = exports. fetch = (ithis,filter,orderBy,limit,startPos)=>{
                 cnum = strpre + t.slice(t.length - 4, t.length)
             }
             item.cnum = cnum
-            item.updateAt = item.createAt = new Date()
+            item.update_at = item.create_at = new Date()
             clt.insertOne(item,function(err,result){
                                     console.log({err,insertedId:result.insertedId})
                                     clt.findOne({_id:new ObjectID(result.insertedId),valid:true},function(err,doc){

@@ -55,7 +55,7 @@ const ACTIONS ={
         }
         sessionData.user=u
         sessionData.user.role = sessionData.user.role  || 'designer'
-        await model.Session.updateById({_id:item._id},{data:JSON.stringify(sessionData)})
+        await model.Session.updateById({_id:item._id},{user_name:u.name,user_num:u.cnum ,data:JSON.stringify(sessionData)})
         ctx.body = {status:'success',data:{item:u,token:item._id}}
     },
     async account(ctx,next){
@@ -70,18 +70,20 @@ const ACTIONS ={
         }
     },
     async logout(ctx,next){
-        let item = await model.Session.deleteById(ctx.query.token)
+        let item = await model.Session.deleteById({_id:ctx.query.token})
         ctx.body = {status:'success',msg:'退出成功'}
     },
     async roles(ctx,next){
       let roles  = []
       Object.keys(role).map(k=>{
-        roles.push({name:k,auth:role[k].tables})
+        if(k!='middle'){
+            roles.push({name:k,auth:role[k].tables})
+        }
       })
       ctx.body = {status:'success',data:{list:roles}}
     }
 }
-
+const role = require('./role')
 
 exports.middle = async (ctx, next) => {
     try {
