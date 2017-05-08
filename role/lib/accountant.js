@@ -4,11 +4,18 @@ var model = require( '../../model')
 
 const _check = user=>{
   let brands = JSON.parse(user.role_data||'{"test":1}')
-  return [true,{city_num:{$in:brands}}]
+  return [true,{city_num:{$in:_.keys(brands)}}]
 }
-const _add_check = user=>{
+const _add_customer_check = user=>{
   let inlist = JSON.parse(user.role_data||'{"test":1}')
   return [true,item=>item.city_num in inlist]
+}
+const _add_check = async(user)=>{
+  let inlist = JSON.parse(user.role_data||'{"test":1}')
+  let cusRet = await model.Customer.fetch({city_num:{$in:_.keys(inlist)}},null,100000,0)
+  let cusMap = {}
+  cusRet.list.map(d=>cusMap[d.cnum]=1)
+  return [true,item=>item.customer_num in cusMap]
 }
 
 const _customer_check = async (user) =>{
@@ -31,14 +38,14 @@ const collections = {
     addItem: _add_check,
   },
   Customer: {
-    getById: _customer_check,
-    getByNum: _customer_check,
-    deleteById: _customer_check,
-    deleteByNum: _customer_check,
-    updateById: _customer_check,
-    updateByNum: _customer_check,
-    fetch: _customer_check,
-    addItem: _add_check,
+    getById: _check,
+    getByNum: _check,
+    deleteById: _check,
+    deleteByNum: _check,
+    updateById: _check,
+    updateByNum: _check,
+    fetch: _check,
+    addItem: _add_customer_check,
   },
   Contract: {
     getById: _customer_check,
@@ -62,6 +69,14 @@ const collections = {
   },
 
   // 只能获取
+  Purchase: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: _customer_check,
+    updateById: _customer_check,
+    updateByNum: _customer_check,
+  },
+
   Component: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
@@ -77,11 +92,7 @@ const collections = {
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
-  Purchase: {
-    getById: user =>[true, {}],
-    getByNum: user =>[true, {}],
-    fetch: user =>[true, {}],
-  },
+
 
 
 
