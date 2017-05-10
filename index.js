@@ -146,9 +146,9 @@ app.use(async (ctx,next) => {
           ctx.body = {status:'success',data:retList}
           break;
         case 'addItem':
-          item.ownByUser = ctx.sessionData.user.cnum
-          item.lastModifyByUser = ctx.sessionData.user.cnum
-          if('auth_filter' in ctx && ctx.auth_filter(item)){
+          item.create_by_user = ctx.sessionData.user.cnum
+          item.last_modify_by_user = ctx.sessionData.user.cnum
+          if('auth_filter' in ctx ){
             retItem = await table.addItem(item)
             ctx.body = {status:'success',data:{item:retItem}}
           }else{
