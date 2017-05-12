@@ -41,7 +41,7 @@ var keys = exports.keys = Object.assign({},Base.keys,{
         },
         city:{
             type: String,
-             enum: ['全国', '北京','武汉',' 上海 ','杭州'],
+             enum: ['全国', '北京市','武汉市',' 上海市 ','杭州市'],
             default: ''
         },
         role: {
