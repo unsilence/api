@@ -10,10 +10,6 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     ],
     default: 'inPurchase'
   }, //等待提交财务，正在付款，已到货，已送货安装
-  take_num: {
-    type: String,
-    default: ''
-  }, //提货单号
   purchase_user: {
     type: String,
     default: ''
@@ -58,51 +54,49 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     type: String,
     default: ''
   }, //品牌
+  real_discount: {
+    type: String,
+    default: ''
+  }, //实际折扣 【仅限财务系统显示】
+  integrate_discount: {
+    type: String,
+    default: ''
+  }, //基准折扣 【仅限财务系统显示】
+  base_discount: {
+    type: String,
+    default: ''
+  }, //标准折扣 【仅限财务系统显示】
+  real_profit_rate: {
+    type: String,
+    default: ''
+  }, //实际利润率 【仅限财务系统显示】
   products: {
     type: [
       {
-        stock_num: {
+        order_type: {
           type: String,
           default: ''
-        },
-        status: {
-          type: String,
-          enum: [
-            'waitAudit', 'waitInput', 'inStock'
-          ],
-          default: ''
-        }, //物流状态
-        state: {
-          type: String,
-          enum: [
-            'good', 'bad'
-          ],
-          default: ''
-        }, //到货后的货品状态 完整 or 有损
-        product_identity: {
+        }, //订单类型
+        contract_num: {
           type: String,
           default: ''
-        }, // PI
-        product_num: {
-          type: String,
-          default: ''
-        }, //产品型号
-        product_name: {
-          type: String,
-          default: ''
-        }, //产品名称
+        }, // 合同编号
         product_quantity: {
           type: String,
           default: ''
         }, //产品数量
-        product_price: {
+        product_type: {
+            type: String,
+            default: ''
+        }, //产品类型
+        order_money: {
           type: String,
           default: ''
-        }, //采购金额（原币）
-        currency_rate: {
-          type: String,
-          default: ''
-        }, //计划汇率
+        }, //订单金额
+         order_at: {
+           type: String,
+           default: ''
+         }, //下单时间
         components: {
           type: [
             {

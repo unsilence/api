@@ -29,6 +29,22 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     type: String,
     default: ''
   },
+  real_discount: {
+    type: String,
+    default: ''
+  }, //实际折扣 【仅限财务系统显示】
+  integrate_discount: {
+    type: String,
+    default: ''
+  }, //基准折扣 【仅限财务系统显示】
+  base_discount: {
+    type: String,
+    default: ''
+  }, //标准折扣 【仅限财务系统显示】
+  real_profit_rate: {
+    type: String,
+    default: ''
+  }, //实际利润率 【仅限财务系统显示】        
   purchase_money_history: {
     type: [
       { //原价历史纪录
@@ -44,7 +60,6 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     ],
     default: []
   },
-
   files: {
     type: [
       { //附件列表
@@ -56,7 +71,6 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     ],
     default: []
   },
-
   batch: {
     type: [
       {

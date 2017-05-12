@@ -1,0 +1,5 @@
+﻿#忽略文件#
+.idea
+.gitattributes
+.node_modules
+/node_modules/
