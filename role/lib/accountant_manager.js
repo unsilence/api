@@ -31,6 +31,7 @@ const collections = {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
+    addItem: _add_check,
   },
 
   // 只能获取
