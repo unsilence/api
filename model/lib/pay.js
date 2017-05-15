@@ -36,7 +36,7 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
   integrate_discount: {
     type: String,
     default: ''
-  }, //基准折扣 【仅限财务系统显示】
+  }, //集成折扣 【仅限财务系统显示】
   base_discount: {
     type: String,
     default: ''

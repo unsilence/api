@@ -100,11 +100,13 @@ const collections = {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
+    addItem: _add_check,
   },
   Output: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
+    addItem: _add_check,
   },
 
   Currency: {
