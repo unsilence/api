@@ -25,6 +25,7 @@ const collections = {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
+    addItem: _add_check,
   },
   Receive: {
     getById: user =>[true, {}],
