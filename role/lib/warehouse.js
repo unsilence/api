@@ -101,12 +101,16 @@ const collections = {
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
     addItem: _add_check,
+    updateById: _customer_check,
+    updateByNum: _customer_check,
   },
   Output: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
     addItem: _add_check,
+    updateById: _customer_check,
+    updateByNum: _customer_check,
   },
 
   Currency: {
