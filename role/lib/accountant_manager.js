@@ -52,9 +52,12 @@ const collections = {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
+  },   
+  Purchasecn: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
   },
-
-
 
   Input: {
     getById: user =>[true, {}],
