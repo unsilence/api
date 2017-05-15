@@ -14,6 +14,7 @@ var tables = exports.tables  = {
   'Product':{read:'all',write:'self'},
   'Proposal':{read:'all',write:'self'},
   'Purchase':{read:'self',write:'self'},
+  'Purchasecn':{read:'self',write:'self'},
   'Receive':{read:'self',write:'self'},
   'Remark':{read:'self',write:'self'},
   'Session':{read:'self',write:'self'},

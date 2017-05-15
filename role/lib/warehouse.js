@@ -94,8 +94,6 @@ const collections = {
   },
 
 
-
-
   Input: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
