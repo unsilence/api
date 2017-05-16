@@ -12,11 +12,11 @@
 
 <!-- /TOC -->
 **注意**:exclamation::exclamation::exclamation:<br>
-*
+
 	所有接口请求时都必须有token，token在用户登录后的localStorage中；请求url的model名首字母一律大写<br>
 	可以通过fireFox的httpRequseter插件测试接口:
 	![示例图片](./request.png)
-*
+
 
 # 数据接口
 
@@ -36,7 +36,7 @@
 
 
 - **返回结果示例**
-> ```json
+```json
 {
     "status": "success",
     "data": {
@@ -56,6 +56,7 @@
 ```
 
 
+
 ## 2、通过id获取一条记录(getById)
 
 - **请求URL**
@@ -71,8 +72,7 @@
 | id       | json     | {"id":"5912b14e902e40457009934f"} } |
 
 
-- **返回结果示例**
->    
+- **返回结果示例**   
 ```json
 {
     "status": "success",
@@ -109,7 +109,6 @@
 
 
 - **返回结果示例**
->    
 ```json
 {
     "status": "success",
@@ -146,7 +145,6 @@
 
 
 - **返回结果示例**
->    
 ```json
 {
     "status": "success",
@@ -175,7 +173,6 @@
 
 
 - **返回结果示例**
->    
 ```json
 {
     "status": "success",
@@ -204,7 +201,6 @@
 
 
 - **返回结果示例**
->    
 ```json
 {
     "status": "success",
@@ -241,7 +237,6 @@
 
 
 - **返回结果示例**
->    
 ```json
 {
     "status": "success",
@@ -278,7 +273,6 @@
 
 
 - **返回结果示例**
->    
 ```json
 {
     "status": "success",
