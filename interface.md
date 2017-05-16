@@ -1,29 +1,29 @@
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [数据接口](#数据接口)
-	- [1、添加一条记录](#1添加一条记录)
-	- [2、通过id获取一条记录](#2通过id获取一条记录)
-	- [3、通过cnum获取一条记录](#3通过cnum获取一条记录)
-	- [4、通过id删除一条记录](#4通过id删除一条记录)
-	- [5、通过cnum删除一条记录](#5通过cnum删除一条记录)
-	- [6、通过id更新一条记录](#6通过id更新一条记录)
-	- [7、通过cnum更新一条记录](#7通过cnum更新一条记录)
-	- [8、通过filter获取一条或多条记录](#8通过filter获取一条或多条记录)
+	- [1、添加一条记录(addItem)](#1添加一条记录additem)
+	- [2、通过id获取一条记录(getById)](#2通过id获取一条记录getbyid)
+	- [3、通过cnum获取一条记录(getByNum)](#3通过cnum获取一条记录getbynum)
+	- [4、通过id删除一条记录(deleteById)](#4通过id删除一条记录deletebyid)
+	- [5、通过cnum删除一条记录(deleteByNum)](#5通过cnum删除一条记录deletebynum)
+	- [6、通过id更新一条记录(updateById)](#6通过id更新一条记录updatebyid)
+	- [7、通过cnum更新一条记录(updateByNum)](#7通过cnum更新一条记录updatebynum)
+	- [8、通过filter获取一条或多条记录(fetch)](#8通过filter获取一条或多条记录fetch)
 
 <!-- /TOC -->
 **注意**:exclamation::exclamation::exclamation:<br>
 *
-	所有接口请求时都必须有token，token在用户登录后的localStorage中<br>
+	所有接口请求时都必须有token，token在用户登录后的localStorage中；请求url的model名首字母一律大写<br>
 	可以通过fireFox的httpRequseter插件测试接口:
 	![示例图片](./request.png)
 *
 
 # 数据接口
 
-##  1、添加一条记录
+##  1、添加一条记录(addItem)
 
 - **请求URL**
-> [api/model/addItem](#)
+> [/api/model/addItem](#)
 
 - **请求方式**
 >**POST**
@@ -57,10 +57,10 @@
 ```
 
 
-## 2、通过id获取一条记录
+## 2、通过id获取一条记录(getById)
 
 - **请求URL**
-> [api/model/getById](#)
+> [/api/model/getById](#)
 
 - **请求方式**
 >**POST**
@@ -94,10 +94,10 @@
 ```
 
 
-## 3、通过cnum获取一条记录
+## 3、通过cnum获取一条记录(getByNum)
 
 - **请求URL**
-> [api/model/getByNum](#)
+> [/api/model/getByNum](#)
 
 - **请求方式**
 >**POST**
@@ -131,10 +131,10 @@
 ```
 
 
-## 4、通过id删除一条记录
+## 4、通过id删除一条记录(deleteById)
 
 - **请求URL**
-> [api/model/deleteById](#)
+> [/api/model/deleteById](#)
 
 - **请求方式**
 >**POST**
@@ -160,10 +160,10 @@
 ```
 
 
-## 5、通过cnum删除一条记录
+## 5、通过cnum删除一条记录(deleteByNum)
 
 - **请求URL**
-> [api/model/deleteByNum](#)
+> [/api/model/deleteByNum](#)
 
 - **请求方式**
 >**POST**
@@ -189,10 +189,10 @@
 ```
 
 
-## 6、通过id更新一条记录
+## 6、通过id更新一条记录(updateById)
 
 - **请求URL**
-> [api/model/updateById](#)
+> [/api/model/updateById](#)
 
 - **请求方式**
 >**POST**
@@ -226,10 +226,10 @@
 ```
 
 
-## 7、通过cnum更新一条记录
+## 7、通过cnum更新一条记录(updateByNum)
 
 - **请求URL**
-> [api/model/updateByNum](#)
+> [/api/model/updateByNum](#)
 
 - **请求方式**
 >**POST**
@@ -263,10 +263,10 @@
 ```
 
 
-## 8、通过filter获取一条或多条记录
+## 8、通过filter获取一条或多条记录(fetch)
 
 - **请求URL**
-> [api/model/fetch](#)
+> [/api/model/fetch](#)
 
 - **请求方式**
 >**POST**
@@ -333,5 +333,3 @@
         "count": 4
     }
 }```
-
-
