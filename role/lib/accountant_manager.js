@@ -15,11 +15,13 @@ const collections = {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
+    addItem: _add_check,
   },
   Customer: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
+    addItem: _add_check,
   },
   Contract: {
     getById: user =>[true, {}],
