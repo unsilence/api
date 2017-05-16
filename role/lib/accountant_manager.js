@@ -9,11 +9,21 @@ const _add_check = user=>{
   let brands = JSON.parse(user.role_data||'{"test":1}')
   return [true,item=>item.supplier_num in brands]
 }
+const _customer_check = async (user) =>{
+  let inlist = JSON.parse(user.role_data||'{"test":1}')
+  let cusRet = await model.Customer.fetch({city_num:{$in:_.keys(inlist)}},null,100000,0)
+  return [true,{customer_num:{$in:cusRet.list.map(d=>d.cnum)}}]
+}
+
 const collections = {
   // 需要城市权限过滤
   Pay: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
+    deleteById: user =>[true, {}],
+    deleteByNum: user =>[true, {}],
+    updateById: user =>[true, {}],
+    updateByNum: user =>[true, {}],
     fetch: user =>[true, {}],
     addItem: _add_check,
   },
