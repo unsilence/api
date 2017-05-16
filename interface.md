@@ -11,11 +11,11 @@
 	- [8、通过filter获取一条或多条记录(fetch)](#8通过filter获取一条或多条记录fetch)
 
 <!-- /TOC -->
-**注意**:exclamation::exclamation::exclamation:<br>
+**注意**: :bangbang: <br>
 
-	所有接口请求时都必须有token，token在用户登录后的localStorage中；请求url的model名首字母一律大写<br>
+	*所有接口请求时都必须有token，token在用户登录后的localStorage中；请求url的model名首字母一律大写<br>
 	可以通过fireFox的httpRequseter插件测试接口:
-	![示例图片](./request.png)
+	![示例图片](./request.png)*
 
 
 # 数据接口
