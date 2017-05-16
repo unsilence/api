@@ -70,6 +70,10 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     type: String,
     default: ''
   }, //产品数量
+  product_type: {
+    type: String,
+    default: ''
+  }, //产品类型
   supplier_name: {
     type: String,
     default: ''
@@ -101,91 +105,8 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
   performance_money: {
     type: String,
     default: ''
-  }, //业绩金额 【仅限财务系统显示】
-  products: {
-    type: [
-      {
-        stock_num: {
-          type: String,
-          default: ''
-        },
-        status: {
-          type: String,
-          enum: [
-            'waitAudit', 'waitInput', 'inStock'
-          ],
-          default: ''
-        }, //物流状态
-        state: {
-          type: String,
-          enum: [
-            'good', 'bad'
-          ],
-          default: ''
-        }, //到货后的货品状态 完整 or 有损
-        product_identity: {
-          type: String,
-          default: ''
-        }, // PI
-        product_num: {
-          type: String,
-          default: ''
-        }, //产品型号
-        product_name: {
-          type: String,
-          default: ''
-        }, //产品名称
-        product_type: {
-            type: String,
-            default: ''
-        }, //产品类型
-        product_quantity: {
-          type: String,
-          default: ''
-        }, //产品数量
-        product_price: {
-          type: String,
-          default: ''
-        }, //采购金额（原币）
-        currency_rate: {
-          type: String,
-          default: ''
-        }, //计划汇率
-        components: {
-          type: [
-            {
-              component_num: {
-                type: String,
-                default: ''
-              }, //组件名字
-              component_quantity: {
-                type: String,
-                default: ''
-              }, //组件数量
-              suitcase_num: {
-                type: String,
-                default: ''
-              }, //提箱单号
-              box_order_num: {
-                type: String,
-                default: ''
-              }, //箱单号
-              box_num: {
-                type: String,
-                default: ''
-              }, //箱号
-              box_quantity: {
-                type: String,
-                default: ''
-              } //箱数
-            }
-          ],
-          default: []
-        }
-      }
-    ],
-    default: []
-  }
+  } //业绩金额 【仅限财务系统显示】
+ 
 })
 
 exports.PRE = 'PCN'

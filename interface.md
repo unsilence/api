@@ -36,8 +36,7 @@
 
 
 - **返回结果示例**
->    
-```json
+> ```json
 {
     "status": "success",
     "data": {
