@@ -37,6 +37,10 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
   base_discount: {
     type: String,
     default: ''
+  },
+  ag1money: {
+    type: String,
+    default: ''
   }
 
 })

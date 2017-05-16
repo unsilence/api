@@ -1,23 +1,12 @@
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [数据接口](#数据接口)
-	- [1、添加一条记录(addItem)](#1添加一条记录additem)
-	- [2、通过id获取一条记录(getById)](#2通过id获取一条记录getbyid)
-	- [3、通过cnum获取一条记录(getByNum)](#3通过cnum获取一条记录getbynum)
-	- [4、通过id删除一条记录(deleteById)](#4通过id删除一条记录deletebyid)
-	- [5、通过cnum删除一条记录(deleteByNum)](#5通过cnum删除一条记录deletebynum)
-	- [6、通过id更新一条记录(updateById)](#6通过id更新一条记录updatebyid)
-	- [7、通过cnum更新一条记录(updateByNum)](#7通过cnum更新一条记录updatebynum)
-	- [8、通过filter获取一条或多条记录(fetch)](#8通过filter获取一条或多条记录fetch)
-
-<!-- /TOC -->
- :point_right:  **注意**: 
+ :point_right:  **注意**:
 
 *所有接口请求时都必须有token，token在用户登录后的localStorage中；请求url的model名首字母一律大写。
 可以通过fireFox的httpRequseter插件测试接口: *
 
 ![示例图片](./request.png)
-	
+
 
 
 # 数据接口
@@ -328,3 +317,15 @@
         "count": 4
     }
 }```
+
+# 权限设置
+
+## 角色分类
+		1. 会计
+		2. 财务主管
+		3. 采购员
+		4. 采购主管
+		5. 库房
+		6. 库房主管
+		7. 设计师
+		8. 超级管理员

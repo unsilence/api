@@ -102,11 +102,11 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     type: String,
     default: ''
   }, //集成系数 【仅限财务系统显示】
-  performance_money: {
+  ag1money: {
     type: String,
     default: ''
   } //业绩金额 【仅限财务系统显示】
- 
+
 })
 
 exports.PRE = 'PCN'
