@@ -12,6 +12,10 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     type: String,
     default: ''
   },
+  product_identity: {
+    type: String,
+    default: ''
+  },
   product_brand: {
     type: String,
     default: ''

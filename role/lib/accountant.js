@@ -3,8 +3,8 @@ var _ = require( 'underscore');
 var model = require( '../../model')
 
 const _check = user=>{
-  let brands = JSON.parse(user.role_data||'{"test":1}')
-  return [true,{city_num:{$in:_.keys(brands)}}]
+  let inlist = JSON.parse(user.role_data||'{"test":1}')
+  return [true,{city_num:{$in:_.keys(inlist)}}]
 }
 const _add_customer_check = user=>{
   let inlist = JSON.parse(user.role_data||'{"test":1}')
@@ -73,8 +73,12 @@ const collections = {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: _customer_check,
-    updateById: _customer_check,
-    updateByNum: _customer_check,
+  },
+  Purchasecn: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+    addItem: _add_check,
   },
 
   Component: {

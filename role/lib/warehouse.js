@@ -26,7 +26,27 @@ const _customer_check = async (user) =>{
 
 
 const collections = {
-  // 需要城市权限过滤
+  // 需要库房权限过滤
+  Input: {
+    getById: _customer_check,
+    getByNum: _customer_check,
+    deleteById: _customer_check,
+    deleteByNum: _customer_check,
+    updateById: _customer_check,
+    updateByNum: _customer_check,
+    fetch: _customer_check,
+    addItem: _add_check,
+  },
+  Output: {
+    getById: _customer_check,
+    getByNum: _customer_check,
+    deleteById: _customer_check,
+    deleteByNum: _customer_check,
+    updateById: _customer_check,
+    updateByNum: _customer_check,
+    fetch: _customer_check,
+    addItem: _add_check,
+  },
   Stock: {
     getById: _customer_check,
     getByNum: _customer_check,
@@ -37,35 +57,22 @@ const collections = {
     fetch: _customer_check,
     addItem: _add_check,
   },
+
+
   Customer: {
-    getById: _check,
-    getByNum: _check,
-    deleteById: _check,
-    deleteByNum: _check,
-    updateById: _check,
-    updateByNum: _check,
-    fetch: _check,
-    addItem: _add_customer_check,
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: _customer_check,
   },
   Contract: {
-    getById: _customer_check,
-    getByNum: _customer_check,
-    deleteById: _customer_check,
-    deleteByNum: _customer_check,
-    updateById: _customer_check,
-    updateByNum: _customer_check,
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
     fetch: _customer_check,
-    addItem: _add_check,
   },
   Receive: {
-    getById: _customer_check,
-    getByNum: _customer_check,
-    deleteById: _customer_check,
-    deleteByNum: _customer_check,
-    updateById: _customer_check,
-    updateByNum: _customer_check,
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
     fetch: _customer_check,
-    addItem: _add_check,
   },
 
   // 只能获取
@@ -73,8 +80,11 @@ const collections = {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: _customer_check,
-    updateById: _customer_check,
-    updateByNum: _customer_check,
+  },
+  Purchasecn: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: _customer_check,
   },
 
   Component: {
@@ -93,23 +103,6 @@ const collections = {
     fetch: user =>[true, {}],
   },
 
-
-  Input: {
-    getById: user =>[true, {}],
-    getByNum: user =>[true, {}],
-    fetch: user =>[true, {}],
-    addItem: _add_check,
-    updateById: _customer_check,
-    updateByNum: _customer_check,
-  },
-  Output: {
-    getById: user =>[true, {}],
-    getByNum: user =>[true, {}],
-    fetch: user =>[true, {}],
-    addItem: _add_check,
-    updateById: _customer_check,
-    updateByNum: _customer_check,
-  },
 
   Currency: {
     getById: user =>[true, {}],
