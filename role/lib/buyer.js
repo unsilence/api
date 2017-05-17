@@ -112,6 +112,11 @@ const collections = {
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
+  Brand: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+  },
   // 仅能获取和个人帐号相关的
   Message: {
     getById: user =>[true, {"$or":[{user_num:user.cnum},{to_user:user.cnum}]}],

@@ -332,7 +332,13 @@
 >不同角色具有不同权限，具体看业务需求.
 
 ## 权限设计
-  1. 采购 按品牌管理业务
+  1. 采购 按品牌管理(Purchase, Product, Component, Proposal)
   2. 客户 按设计中心管理
-  3. 财务 按城市
-  4. 物流 按库房
+  3. 财务 按城市管理(Pay, Receive, Contract, Customer)
+  4. 物流 按库房管理(Input, Output, Stock)
+
+# 导出接口
+
+
+
+# 消息接口
