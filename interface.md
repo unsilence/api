@@ -47,7 +47,7 @@
 
 
 - **返回结果示例**
-```javascript```
+```json
 {
     "status": "success",
     "data": {
