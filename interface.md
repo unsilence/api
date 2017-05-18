@@ -1,4 +1,3 @@
-
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [数据接口](#数据接口)
@@ -11,9 +10,8 @@
 	- [7、通过cnum更新一条记录(updateByNum)](#7通过cnum更新一条记录updatebynum)
 	- [8、通过filter获取一条或多条记录(fetch)](#8通过filter获取一条或多条记录fetch)
 - [权限设置](#权限设置)
-	- [角色分类](#角色分类)
-	- [权限设计](#权限设计)
 - [导出接口](#导出接口)
+- [文件上传接口](#文件上传接口)
 - [消息接口](#消息接口)
 
 <!-- /TOC -->
@@ -49,7 +47,7 @@
 
 
 - **返回结果示例**
-```json
+```json```
 {
     "status": "success",
     "data": {
@@ -86,7 +84,7 @@
 
 
 - **返回结果示例**   
-```json
+```json```
 {
     "status": "success",
     "data": {
@@ -122,7 +120,7 @@
 
 
 - **返回结果示例**
-```json
+```json```
 {
     "status": "success",
     "data": {
@@ -158,7 +156,7 @@
 
 
 - **返回结果示例**
-```json
+```json```
 {
     "status": "success",
     "data": {
@@ -186,7 +184,7 @@
 
 
 - **返回结果示例**
-```json
+```json```
 {
     "status": "success",
     "data": {
@@ -214,7 +212,7 @@
 
 
 - **返回结果示例**
-```json
+```json```
 {
     "status": "success",
     "data": {
@@ -250,7 +248,7 @@
 
 
 - **返回结果示例**
-```json
+```json```
 {
     "status": "success",
     "data": {
@@ -286,7 +284,7 @@
 
 
 - **返回结果示例**
-```json
+```json```
 {
     "status": "success",
     "data": {
@@ -338,11 +336,11 @@
         ],
         "count": 4
     }
-}```
+}
+```
 
 # 权限设置
-
-## 角色分类
+- **角色分类**
 		1. 会计
 		2. 财务主管
 		3. 采购员
@@ -353,7 +351,7 @@
 		8. 超级管理员
 >不同角色具有不同权限，具体看业务需求.
 
-## 权限设计
+- **权限设计**
   1. 采购 按品牌管理(Purchase, Product, Component, Proposal)
   2. 客服 按设计中心管理
   3. 财务 按城市管理(Pay, Receive, Contract, Customer)
@@ -369,7 +367,7 @@
 
 
 
-# 文件上传
+# 文件上传接口
 - **点击上传请求URL**
 > [/api/file/upload](#)
 
