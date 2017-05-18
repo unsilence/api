@@ -1,9 +1,31 @@
 
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
- :point_right:  **注意**:
+- [数据接口](#数据接口)
+	- [1、添加一条记录(addItem)](#1添加一条记录additem)
+	- [2、通过id获取一条记录(getById)](#2通过id获取一条记录getbyid)
+	- [3、通过cnum获取一条记录(getByNum)](#3通过cnum获取一条记录getbynum)
+	- [4、通过id删除一条记录(deleteById)](#4通过id删除一条记录deletebyid)
+	- [5、通过cnum删除一条记录(deleteByNum)](#5通过cnum删除一条记录deletebynum)
+	- [6、通过id更新一条记录(updateById)](#6通过id更新一条记录updatebyid)
+	- [7、通过cnum更新一条记录(updateByNum)](#7通过cnum更新一条记录updatebynum)
+	- [8、通过filter获取一条或多条记录(fetch)](#8通过filter获取一条或多条记录fetch)
+- [权限设置](#权限设置)
+	- [角色分类](#角色分类)
+	- [权限设计](#权限设计)
+- [导出接口](#导出接口)
+- [消息接口](#消息接口)
 
-*所有接口请求时都必须有token，token在用户登录后的localStorage中；请求url的model名首字母一律大写。
-可以通过fireFox的httpRequseter插件测试接口: *
+<!-- /TOC -->
+:point_right:  **注意**：
+>1.所有接口请求时都必须有token，token在用户登录后的localStorage中；
+
+>2.请求url的model名首字母一律大写。
+
+>3.请求和相应的数据格式只支持json，请求方法都是POST。
+
+>可以通过fireFox的httpRequseter插件测试接口:
+
 
 ![示例图片](./request.png)
 
@@ -337,8 +359,12 @@
   3. 财务 按城市管理(Pay, Receive, Contract, Customer)
   4. 物流 按库房管理(Input, Output, Stock)
 
+
+
 # 导出接口
+- **客户端请求URL**
+> [/api/export/报表名](#)
 
-
+- **服务端"im-api/export/lib"目录下添加 报表名.js**
 
 # 消息接口

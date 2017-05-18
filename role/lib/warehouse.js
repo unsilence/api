@@ -2,14 +2,7 @@
 var _ = require( 'underscore');
 var model = require( '../../model')
 
-const _check = user=>{
-  let brands = JSON.parse(user.role_data||'{"test":1}')
-  return [true,{}]
-}
-const _add_customer_check = user=>{
-  let inlist = JSON.parse(user.role_data||'{"test":1}')
-  return [true,item=>true]
-}
+
 const _add_check = async(user)=>{
   let inlist = JSON.parse(user.role_data||'{"test":1}')
   let cusRet = await model.Customer.fetch({warehouse_num:{$in:_.keys(inlist)}},null,100000,0)
