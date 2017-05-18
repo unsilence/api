@@ -355,16 +355,29 @@
 
 ## 权限设计
   1. 采购 按品牌管理(Purchase, Product, Component, Proposal)
-  2. 客户 按设计中心管理
+  2. 客服 按设计中心管理
   3. 财务 按城市管理(Pay, Receive, Contract, Customer)
   4. 物流 按库房管理(Input, Output, Stock)
 
 
 
 # 导出接口
-- **客户端请求URL**
+- **客户端点击导出按钮请求URL**
 > [/api/export/报表名](#)
 
 - **服务端"im-api/export/lib"目录下添加 报表名.js**
+
+
+
+# 文件上传
+- **点击上传请求URL**
+> [/api/file/upload](#)
+
+- **返回结果为图片的新md5值**
+
+```javascript```
+	let newMd5 = info.file.response.md5list[0]
+```
+>上传后图片的src为/api/file/newMd5
 
 # 消息接口

@@ -116,6 +116,7 @@ const collections = {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
+    addItem: user =>[true, {}],
   },
   // 仅能获取和个人帐号相关的
   Message: {
