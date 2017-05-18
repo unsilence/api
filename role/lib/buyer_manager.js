@@ -115,6 +115,10 @@ const collections = {
   Brand: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
+    deleteById: user =>[true, {}],
+    deleteByNum: user =>[true, {}],
+    updateById: user =>[true, {}],
+    updateByNum: user =>[true, {}],
     fetch: user =>[true, {}],
     addItem: user =>[true, {}],
   },

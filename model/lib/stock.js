@@ -59,6 +59,10 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     type: String,
     default: ''
   },
+  arrive_at: {
+    type: String,
+    default: ''
+  },
   status: {
     type: String,
     enum: [
