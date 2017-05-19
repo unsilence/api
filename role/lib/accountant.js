@@ -26,7 +26,7 @@ const _customer_check = async (user) =>{
 
 
 const collections = {
-  // 需要城市权限过滤
+  // 财务需要城市权限过滤
   Pay: {
     getById: _customer_check,
     getByNum: _customer_check,

@@ -10,7 +10,7 @@ const _add_check = user=>{
   return [true,item=>item.supplier_num in brands]
 }
 const collections = {
-  // 需要品牌权限过滤
+  // 设计师需要品牌权限过滤
   Component: {
     getById: _check,
     getByNum: _check,

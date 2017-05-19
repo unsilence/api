@@ -26,13 +26,24 @@ const _customer_check = async (user) =>{
 
 
 const collections = {
-  // 需要设计中心权限过滤
-  Pay: {
-    getById: user =>[true, {}],
-    getByNum: user =>[true, {}],
-    fetch: user =>[true, {}],
-  },
+  // 客服需要设计中心权限过滤
+  
   Customer: {
+    getById: _check,
+    getByNum: _check,
+    fetch: _check,
+  },
+  Purchase: {
+    getById: _customer_check,
+    getByNum: _customer_check,
+    fetch: _customer_check,
+  },
+  Output: {
+    getById: _customer_check,
+    getByNum: _customer_check,
+    fetch: _customer_check,
+  },
+  Pay: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
@@ -49,11 +60,6 @@ const collections = {
 
   },
 
-  Purchase: {
-    getById: user =>[true, {}],
-    getByNum: user =>[true, {}],
-    fetch: user =>[true, {}],
-  },
   Purchasecn: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
@@ -77,18 +83,12 @@ const collections = {
   },
 
 
-
-
   Input: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
-  Output: {
-    getById: user =>[true, {}],
-    getByNum: user =>[true, {}],
-    fetch: user =>[true, {}],
-  },
+  
   Stock: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],

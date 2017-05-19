@@ -2,37 +2,26 @@
 var _ = require( 'underscore');
 var model = require( '../../model')
 
-const _check = user=>{
-  let inlist = JSON.parse(user.role_data||'{"test":1}')
-  return [true,{center_num:{$in:_.keys(inlist)}}]
-}
-const _add_customer_check = user=>{
-  let inlist = JSON.parse(user.role_data||'{"test":1}')
-  return [true,item=>item.center_num in inlist]
-}
-const _add_check = async(user)=>{
-  let inlist = JSON.parse(user.role_data||'{"test":1}')
-  let cusRet = await model.Customer.fetch({center_num:{$in:_.keys(inlist)}},null,100000,0)
-  let cusMap = {}
-  cusRet.list.map(d=>cusMap[d.cnum]=1)
-  return [true,item=>item.customer_num in cusMap]
-}
-
-const _customer_check = async (user) =>{
-  let inlist = JSON.parse(user.role_data||'{"test":1}')
-  let cusRet = await model.Customer.fetch({center_num:{$in:_.keys(inlist)}},null,100000,0)
-  return [true,{customer_num:{$in:cusRet.list.map(d=>d.cnum)}}]
-}
-
 
 const collections = {
-  // 需要设计中心权限过滤
-  Pay: {
+  // 客服主管
+  
+  Customer: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
-  Customer: {
+  Purchase: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+  },
+  Output: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+  },
+  Pay: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
@@ -49,11 +38,6 @@ const collections = {
 
   },
 
-  Purchase: {
-    getById: user =>[true, {}],
-    getByNum: user =>[true, {}],
-    fetch: _customer_check,
-  },
   Purchasecn: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
@@ -77,18 +61,12 @@ const collections = {
   },
 
 
-
-
   Input: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
-  Output: {
-    getById: user =>[true, {}],
-    getByNum: user =>[true, {}],
-    fetch: user =>[true, {}],
-  },
+  
   Stock: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
@@ -124,7 +102,7 @@ const collections = {
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
-  
+
   // 仅能获取和个人帐号相关的
   Message: {
     getById: user =>[true, {"$or":[{user_num:user.cnum},{to_user:user.cnum}]}],

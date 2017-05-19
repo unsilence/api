@@ -10,7 +10,7 @@ const _add_check = user=>{
   return [true,item=>item.brand_num in brands]
 }
 const collections = {
-  // 需要品牌权限过滤
+  // 采购需要品牌权限过滤
   Component: {
     getById: _check,
     getByNum: _check,
@@ -51,6 +51,17 @@ const collections = {
     fetch: _check,
     addItem: _add_check,
   },
+  Brand: {
+    getById: _check,
+    getByNum: _check,
+    deleteById: _check,
+    deleteByNum: _check,
+    updateById: _check,
+    updateByNum: _check,
+    fetch: _check,
+    addItem: user =>[true, {}],
+  },
+
   // 只能获取
   Customer: {
     getById: user =>[true, {}],
@@ -112,16 +123,7 @@ const collections = {
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
-  Brand: {
-    getById: user =>[true, {}],
-    getByNum: user =>[true, {}],
-    deleteById: user =>[true, {}],
-    deleteByNum: user =>[true, {}],
-    updateById: user =>[true, {}],
-    updateByNum: user =>[true, {}],
-    fetch: user =>[true, {}],
-    addItem: user =>[true, {}],
-  },
+  
   // 仅能获取和个人帐号相关的
   Message: {
     getById: user =>[true, {"$or":[{user_num:user.cnum},{to_user:user.cnum}]}],

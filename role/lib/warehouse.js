@@ -5,49 +5,45 @@ var model = require( '../../model')
 
 const _add_check = async(user)=>{
   let inlist = JSON.parse(user.role_data||'{"test":1}')
-  let cusRet = await model.Customer.fetch({warehouse_num:{$in:_.keys(inlist)}},null,100000,0)
-  let cusMap = {}
-  cusRet.list.map(d=>cusMap[d.cnum]=1)
-  return [true,item=>true]
+  return [true,item=>item.warehouse_num in inlist]
 }
 
-const _customer_check = async (user) =>{
+const _check = async (user) =>{
   let inlist = JSON.parse(user.role_data||'{"test":1}')
-  let cusRet = await model.Customer.fetch({warehouse_num:{$in:_.keys(inlist)}},null,100000,0)
-  return [true,{}]
+  return [true,{warehouse_num:{$in:_.keys(inlist)}}]
 }
 
 
 const collections = {
-  // 需要库房权限过滤
+  // 物流需要库房权限过滤
   Input: {
-    getById: _customer_check,
-    getByNum: _customer_check,
-    deleteById: _customer_check,
-    deleteByNum: _customer_check,
-    updateById: _customer_check,
-    updateByNum: _customer_check,
-    fetch: _customer_check,
+    getById: _check,
+    getByNum: _check,
+    deleteById: _check,
+    deleteByNum: _check,
+    updateById: _check,
+    updateByNum: _check,
+    fetch: _check,
     addItem: _add_check,
   },
   Output: {
-    getById: _customer_check,
-    getByNum: _customer_check,
-    deleteById: _customer_check,
-    deleteByNum: _customer_check,
-    updateById: _customer_check,
-    updateByNum: _customer_check,
-    fetch: _customer_check,
+    getById: _check,
+    getByNum: _check,
+    deleteById: _check,
+    deleteByNum: _check,
+    updateById: _check,
+    updateByNum: _check,
+    fetch: _check,
     addItem: _add_check,
   },
   Stock: {
-    getById: _customer_check,
-    getByNum: _customer_check,
-    deleteById: _customer_check,
-    deleteByNum: _customer_check,
-    updateById: _customer_check,
-    updateByNum: _customer_check,
-    fetch: _customer_check,
+    getById: _check,
+    getByNum: _check,
+    deleteById: _check,
+    deleteByNum: _check,
+    updateById: _check,
+    updateByNum: _check,
+    fetch: _check,
     addItem: _add_check,
   },
 
@@ -55,29 +51,29 @@ const collections = {
   Customer: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
-    fetch: _customer_check,
+    fetch: user =>[true, {}],
   },
   Contract: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
-    fetch: _customer_check,
+    fetch: user =>[true, {}],
   },
   Receive: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
-    fetch: _customer_check,
+    fetch: user =>[true, {}],
   },
 
   // 只能获取
   Purchase: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
-    fetch: _customer_check,
+    fetch: user =>[true, {}],
   },
   Purchasecn: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
-    fetch: _customer_check,
+    fetch: user =>[true, {}],
   },
 
   Component: {

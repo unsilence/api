@@ -3,7 +3,7 @@ var _ = require( 'underscore');
 
 
 const collections = {
-  // 需要城市权限过滤
+  // 财务主管
   Pay: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
