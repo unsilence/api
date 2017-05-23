@@ -107,7 +107,7 @@ app.use(async (ctx,next) => {
           if('auth_filter' in ctx){
             filter = Object.assign(filter,ctx.auth_filter)
           }
-          item = {lastModifyByUser:ctx.sessionData.user.cnum}
+          item = {last_modify_by_user:ctx.sessionData.user.cnum}
           retItem = await table.deleteById(filter,item)
           ctx.body = {status:'success',data:{item:retItem}}
           break;
@@ -116,7 +116,7 @@ app.use(async (ctx,next) => {
           if('auth_filter' in ctx){
             filter = Object.assign(filter,ctx.auth_filter)
           }
-          item = {lastModifyByUser:ctx.sessionData.user.cnum}
+          item = {last_modify_by_user:ctx.sessionData.user.cnum}
           retItem = await table.deleteByNum(filter,item)
           ctx.body = {status:'success',data:{item:retItem}}
           break;
@@ -125,7 +125,7 @@ app.use(async (ctx,next) => {
           if('auth_filter' in ctx){
             filter = Object.assign(filter,ctx.auth_filter)
           }
-          item.lastModifyByUser = ctx.sessionData.user.cnum
+          item.last_modify_by_user = ctx.sessionData.user.cnum
           retItem = await table.updateById(filter,item)
           ctx.body = {status:'success',data:{item:retItem}}
           break;
@@ -134,7 +134,7 @@ app.use(async (ctx,next) => {
           if('auth_filter' in ctx){
             filter = Object.assign(filter,ctx.auth_filter)
           }
-          item.lastModifyByUser = ctx.sessionData.user.cnum
+          item.last_modify_by_user = ctx.sessionData.user.cnum
           retItem = await table.updateByNum(filter,item)
           ctx.body = {status:'success',data:{item:retItem}}
           break;
