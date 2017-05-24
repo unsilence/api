@@ -11,6 +11,12 @@ colors.setTheme({silly: 'rainbow',input: 'grey',verbose: 'cyan',prompt: 'red',
 
 var serverPath = 'http://172.60.1.216:8899';
 
+let colls = ['Brand','Center','City','Pay','Customer','Contract','Receive','Component','Product','Productraw','Proposal','Purchase','Brand'];
+let buyColls =['Component','Product','Productraw','Proposal','Purchase','Brand'];
+let accColls =['Pay','Customer','Contract','Receive'];
+let warColls =['Input','Output','Stock'];
+let opeColls= [];
+
 var token, code;
 describe('--auth登录接口', () => {
     describe('#get_token()', () =>{
@@ -41,18 +47,21 @@ describe('--auth登录接口', () => {
     });
 });
 
-//财务主管权限
+//采购权限
 describe('--model数据接口', () => {
-    let colls = ['Brand','Center','City','Pay','Customer','Contract','Receive'];
-    let opeColls =['Pay','Customer','Contract','Receive'];
     let id,cnum;
     for(let col of colls){
         describe('#fetch_'+col, () => {
             it('获取'+col+'表数据', async () => {
                 let body = {};
                 let res = await requestServer('/'+col+'/fetch', token, body);
-                id = JSON.parse(res).data.list[0]._id;
-                cnum = JSON.parse(res).data.list[0].cnum;
+                let resData = JSON.parse(res);
+                if(resData.data.list.length>0){
+                    id = JSON.parse(res).data.list[0]._id;
+                    cnum = JSON.parse(res).data.list[0].cnum;
+                }else{
+                    id,cnum="";
+                }
                 console.log(("-------fetch_"+col+"成功").info)
                 res.should.match(/{"status":"success"/);
             });

@@ -3,8 +3,9 @@ var _ = require( 'underscore');
 
 const _check = user=>{
   let brands = JSON.parse(user.role_data||'{"test":1}')
-  return [true,{brand_num:{$in:_.keys(brands)}}]
+  return [true,{$or:[{brand_num:{$in:_.keys(brands)}},{brand_name:{$in:_.keys(brands)}}]}]
 }
+
 const _add_check = user=>{
   let brands = JSON.parse(user.role_data||'{"test":1}')
   return [true,item=>item.brand_num in brands]
