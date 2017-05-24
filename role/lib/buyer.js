@@ -31,6 +31,16 @@ const collections = {
     fetch: _check,
     addItem: _add_check,
   },
+  Productraw: {
+    getById: _check,
+    getByNum: _check,
+    deleteById: _check,
+    deleteByNum: _check,
+    updateById: _check,
+    updateByNum: _check,
+    fetch: _check,
+    addItem: _add_check,
+  },
   Proposal: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],

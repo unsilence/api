@@ -5,7 +5,17 @@ var model = require( '../../model')
 
 const collections = {
   // 客服主管
-  
+  Question: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    deleteById: user =>[true, {}],
+    deleteByNum: user =>[true, {}],
+    updateById: user =>[true, {}],
+    updateByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+    addItem: user =>[true, {}],
+  },    
+    
   Customer: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],

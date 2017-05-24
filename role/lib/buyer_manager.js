@@ -23,6 +23,16 @@ const collections = {
     fetch: user =>[true, {}],
     addItem: user =>[true, {}],
   },
+  Productraw: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    deleteById: user =>[true, {}],
+    deleteByNum: user =>[true, {}],
+    updateById: user =>[true, {}],
+    updateByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+    addItem: user =>[true, {}],
+  },
   Proposal: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],

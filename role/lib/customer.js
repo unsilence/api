@@ -27,7 +27,17 @@ const _customer_check = async (user) =>{
 
 const collections = {
   // 客服需要设计中心权限过滤
-  
+  Question: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    deleteById: user =>[true, {}],
+    deleteByNum: user =>[true, {}],
+    updateById: user =>[true, {}],
+    updateByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+    addItem: user =>[true, {}],
+  },    
+
   Customer: {
     getById: _check,
     getByNum: _check,

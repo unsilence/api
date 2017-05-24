@@ -32,7 +32,7 @@ const ACTIONS ={
 
             let sessionData = Object.assign({},JSON.parse(item.data),{phone,code,codeCreateAt})
             await model.Session.updateById({_id:item._id},{data:JSON.stringify(sessionData)})
-            ctx.body = {status:'success',msg:'验证码已经发送'}
+            ctx.body = {status:'success',msg:'验证码已经发送',code:code}
         }else{
             ctx.body = {status:'wrong',msg:'验证码发送失败'}
         }

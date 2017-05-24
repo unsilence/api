@@ -58,6 +58,14 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     type: String,
     default: ''
   }, //品牌
+  sale_originalPrice: {
+    type: String,
+    default: ''
+  }, //销售原价
+  sale_discount: {
+    type: String,
+    default: ''
+  }, //销售折扣
   products: {
     type: [
       {
