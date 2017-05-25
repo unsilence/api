@@ -31,6 +31,16 @@ const collections = {
     fetch: _check,
     addItem: _add_check,
   },
+  Productraw: {
+    getById: _check,
+    getByNum: _check,
+    deleteById: _check,
+    deleteByNum: _check,
+    updateById: _check,
+    updateByNum: _check,
+    fetch: _check,
+    addItem: _add_check,
+  },
   Proposal: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
@@ -72,6 +82,7 @@ const collections = {
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
+
   Input: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
@@ -87,12 +98,8 @@ const collections = {
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
+
   Currency: {
-    getById: user =>[true, {}],
-    getByNum: user =>[true, {}],
-    fetch: user =>[true, {}],
-  },
-  Supplier: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
@@ -113,6 +120,11 @@ const collections = {
     fetch: user =>[true, {}],
   },
   Brand: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+  },
+  Question: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],

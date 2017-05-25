@@ -4,7 +4,7 @@ var Base = require('./_base')
 
 // 商品  可以包含1-n个部件
 var keys = exports.keys = Object.assign({}, Base.keys, {
-  brand_name: {
+  brand_num: {
     type: String,
     default: ''
   },

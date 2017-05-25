@@ -86,6 +86,11 @@ const collections = {
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
+  Productraw: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+  },
   Proposal: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
@@ -109,11 +114,7 @@ const collections = {
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
-  Supplier: {
-    getById: user =>[true, {}],
-    getByNum: user =>[true, {}],
-    fetch: user =>[true, {}],
-  },
+  
   Warehouse: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],

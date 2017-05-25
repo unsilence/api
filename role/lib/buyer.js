@@ -3,7 +3,7 @@ var _ = require( 'underscore');
 
 const _check = user=>{
   let brands = JSON.parse(user.role_data||'{"test":1}')
-  return [true,{$or:[{brand_num:{$in:_.keys(brands)}},{brand_name:{$in:_.keys(brands)}}]}]
+  return [true,{brand_num:{$in:_.keys(brands)}}]
 }
 
 const _add_check = user=>{
@@ -109,12 +109,8 @@ const collections = {
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
+
   Currency: {
-    getById: user =>[true, {}],
-    getByNum: user =>[true, {}],
-    fetch: user =>[true, {}],
-  },
-  Supplier: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
@@ -130,6 +126,11 @@ const collections = {
     fetch: user =>[true, {}],
   },
   City: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+  },
+  Question: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],

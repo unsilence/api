@@ -106,11 +106,7 @@ const collections = {
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
-  Supplier: {
-    getById: user =>[true, {}],
-    getByNum: user =>[true, {}],
-    fetch: user =>[true, {}],
-  },
+ 
   Warehouse: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
@@ -122,6 +118,11 @@ const collections = {
     fetch: user =>[true, {}],
   },
   City: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+  },
+  Question: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
