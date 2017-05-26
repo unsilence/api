@@ -26,7 +26,7 @@ var keys = exports.keys = Object.assign({},Base.keys,{
         },
         company:{
             type: String,
-             enum: ['总部', '北京', '杭州', '武汉',, '上海'],
+             enum: ['总部', '北京', '杭州', '武汉', '上海'],
             default: ''
         },
         job:{ // 工作岗位
@@ -41,7 +41,7 @@ var keys = exports.keys = Object.assign({},Base.keys,{
         },
         city:{
             type: String,
-             enum: ['全国', '北京市','武汉市',' 上海市 ','杭州市'],
+             enum: ['全国', '北京','武汉',' 上海 ','杭州'],
             default: ''
         },
         role: {

@@ -9,7 +9,7 @@ const colors = require('colors');
 colors.setTheme({silly: 'rainbow',input: 'grey',verbose: 'cyan',prompt: 'red',
     info: 'green',data: 'blue',help: 'cyan',warn: 'yellow',debug: 'magenta',error: 'red'});
 
-var serverPath = 'http://172.60.1.104';
+var serverPath = 'http://172.60.1.216:8899';
 
 let colls = ['Brand','Center','City','Currency','Warehouse',
     'Pay','Customer','Contract','Receive',
@@ -21,9 +21,9 @@ let buyColls =['Component','Product','Productraw','Proposal','Purchase','Brand']
 let accColls =['Pay','Customer','Contract','Receive'];
 let warColls =['Input','Output','Stock'];
 let cusColls =['Question'];
-let opeColls= [];
+let opeColls;
 
-var token, code;
+var phone,token, code;
 describe('--auth登录接口', () => {
     describe('#get_token()', () =>{
         it('获取24个字符token值',  async () =>{
@@ -117,7 +117,6 @@ describe('--model数据接口', () => {
                 let res = await requestServer('/'+col+'/getById', token, body);
                 res.should.match(/{"status":"success"/);
                 console.log(("-------getById_"+col+"成功").info)
-
             });
         });
         describe('#getByNum_'+col, () => {
