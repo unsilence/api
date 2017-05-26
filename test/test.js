@@ -9,7 +9,7 @@ const colors = require('colors');
 colors.setTheme({silly: 'rainbow',input: 'grey',verbose: 'cyan',prompt: 'red',
     info: 'green',data: 'blue',help: 'cyan',warn: 'yellow',debug: 'magenta',error: 'red'});
 
-var serverPath = 'http://172.60.1.216:8899';
+var serverPath = 'http://172.60.1.104';
 
 let colls = ['Brand','Center','City','Currency','Warehouse',
     'Pay','Customer','Contract','Receive',

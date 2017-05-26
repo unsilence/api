@@ -10,10 +10,10 @@ const cols = [
 ,{key:'pic',name:'图片',width:20}
 ,{key:'warehouse_num',name:'展厅/库房',width:20}
 ,{key:'product_num',name:'商品编号',width:20}
-,{key:'product_supplier',name:'品牌',width:20}
+,{key:'product_brand',name:'品牌',width:20}
 ,{key:'product_model',name:'型号',width:20}
 ,{key:'product_name',name:'名字',width:20}
-,{key:'componnents',name:'部件',width:20}
+,{key:'components',name:'部件',width:20}
 ,{key:'status_sale',name:'销售属性',width:20}
 ,{key:'status',name:'库房属性',width:20}]
 const names = {sold:'已售',waitout:'未出库',out:'已出库',may:'未销售',waitin:'等待入库'}
