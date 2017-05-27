@@ -69,7 +69,7 @@ exports.middle = async (ctx, next) => {
 		col=1
 		for(let d of cols){
 				let v = st[d.key]
-				ws.cell(line,col++).string(v).style(style)
+            	try{ws.cell(line,col++).string(v).style(style)}catch(err){console.log(err)}
 		}
 
 	}

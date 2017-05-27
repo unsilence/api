@@ -49,7 +49,7 @@ exports.middle = async (ctx, next) => {
 
   // let stocks = await model.Stock.fetch(flt,'-_id',10000*10000,0) //filter,orderBy,limit,startPos
 
-    let ordRes = await model.Order.fetch(
+    let ordRes = await model.Purchase.fetch(
         flt,
         10000*10000,
         0
@@ -71,7 +71,7 @@ exports.middle = async (ctx, next) => {
         let cust={}
         ordRes.list.map(v=>{
           if(d.cnum==v.customer_num){
-            cust=Object.assign(cust,{name:d.name,address:d.address,customer:d.cnum,center_master:d.center_master},v)
+            cust=Object.assign(cust,{name:d.name,address:d.address,customer:d.cnum,center_num:d.center_num},v)
             cusArr.push(cust);
           }
         })
@@ -81,7 +81,7 @@ exports.middle = async (ctx, next) => {
     payRes.list.map(p=>{
       let payObj={}
        cusArr.map(c=>{
-         if(c.cnum==p.order_num){
+         if(c.cnum==p.purchase_num){
            payObj=Object.assign({},c,
              {
               payType:p.itype,AntRate:cmap[p.itype],SpayBatch:p.origin_sum,

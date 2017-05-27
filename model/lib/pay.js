@@ -44,7 +44,15 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
   real_profit_rate: {
     type: String,
     default: ''
-  }, //实际利润率 【仅限财务系统显示】        
+  }, //实际利润率 【仅限财务系统显示】
+  integrate_num: {
+      type: String,
+      default: ''
+  }, //集成系数 【仅限财务系统显示】
+  ag1money: {
+      type: String,
+      default: ''
+  }, //业绩金额 【仅限财务系统显示】  
   purchase_money_history: {
     type: [
       { //原价历史纪录

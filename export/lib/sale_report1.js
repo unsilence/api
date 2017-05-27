@@ -79,20 +79,17 @@ exports.middle = async (ctx, next) => {
         d.name = cus.name
         d.address = cus.address
         d.channel_name = cus.channel_name
-        d.channel = cus.channel
+        d.channel_type = cus.channel_type
         d.market_master = cus.market_master
-        d.design_center = cus.design_center
-        d.bzman = cus.bzman
+        d.center_num = cus.center_num
+        d.customer_manager = cus.customer_manager
         d.designer = cus.designer
-        d.center_master = cus.center_master
+        d.center_manager = cus.center_manager
         d.operator_master = cus.operator_master
         d.city_master = cus.city_master
         d.perItype = "首期业绩"
         d.pkind = " "
-        d.rec_Rate = ""
         d.ag1money = "555555"
-        d.operator_master = cus.operator_master
-        d.operator_master = cus.operator_master
         d.rec_Rate = getReciveRate(d)
       })
   console.log('recRes.length',recRes.list.length)
