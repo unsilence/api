@@ -66,6 +66,14 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     type: String,
     default: ''
   }, //销售折扣
+  integrate_num: {
+    type: String,
+    default: ''
+  }, //集成系数 【仅限财务系统显示】
+  ag1money: {
+    type: String,
+    default: ''
+  }, //业绩金额 【仅限财务系统显示】
   products: {
     type: [
       {

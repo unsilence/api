@@ -9,23 +9,23 @@ const cols = [
 {key:'cnum',name:'编号',width:20}
 ,{key:'name',name:'名字',width:20}
 ,{key:'address',name:'地址',width:20}
-,{key:'buyer_info',name:'品牌专员1（询价）',width:20}
-,{key:'buyer_order',name:'品牌专员2（下单）',width:20}
-,{key:'buyer_master',name:'采购经理',width:20}
-,{key:'project_master',name:'项目经理',width:20}
-,{key:'depart_master',name:'项目部经理',width:20}
-,{key:'brand',name:'品牌',width:20}
+,{key:'brand_user1',name:'品牌专员1（询价）',width:20}
+,{key:'brand_user2',name:'品牌专员2（下单）',width:20}
+,{key:'purchase_master',name:'采购经理',width:20}
+,{key:'project_manager',name:'项目经理',width:20}
+,{key:'project_master',name:'项目部经理',width:20}
+,{key:'brand_num',name:'品牌',width:20}
 ,{key:'product_type',name:'业绩类型',width:20},
 {key:'首期业绩',name:'业绩性质',width:20},
 {key:'order_type',name:'订单类型',width:20},
 {key:'money',name:'订单金额',width:20},
 {key:'order_at',name:'下单时间',width:20},
-{key:'perItype',name:'集成系数',width:20},
-{key:'ag1money',name:'业绩金额',width:20}]
+{key:'integrate_num',name:'集成系数',width:20},
+{key:'performance_money',name:'业绩金额',width:20}]
 
 
 exports.middle = async (ctx, next) => {
-	let item = await model.Session.getById(ctx.query.token)
+	let item = await model.Session.getById({_id:ctx.query.token})
 	let sessionData
 	if(item){
 			sessionData = Object.assign({},JSON.parse(item.data))

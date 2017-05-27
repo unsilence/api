@@ -9,13 +9,13 @@ const cols = [
 {key:'cnum',name:'编号',width:20}
 ,{key:'name',name:'名字',width:20}
 ,{key:'address',name:'地址',width:20}
-,{key:'channel',name:'业务渠道',width:20}
+,{key:'channel_type',name:'业务渠道',width:20}
 ,{key:'channel_name',name:'渠道姓名',width:20}
 ,{key:'market_master',name:'客源/网销部主管',width:20}
-,{key:'design_center',name:'部门',width:20}
-,{key:'bzman',name:'客户经理',width:20}
+,{key:'center_num',name:'部门',width:20}
+,{key:'customer_manager',name:'客户经理',width:20}
 ,{key:'designer',name:'设计师',width:20}
-,{key:'center_master',name:'中心经理',width:20},
+,{key:'center_manager',name:'中心经理',width:20},
 {key:'operator_master',name:'运营总监',width:20},
 {key:'city_master',name:'城市总监',width:20},
 {key:'itype',name:'业绩类型',width:20},
@@ -23,7 +23,7 @@ const cols = [
 {key:'pkind',name:'订单类型',width:20},
 {key:'money',name:'收款金额',width:20},
 {key:'receive_at',name:'收款时间',width:20},
-{key:'rec_Rate',name:'首期集成系数',width:20},
+{key:'integrate_discount',name:'首期集成系数',width:20},
 {key:'ag1money',name:'业绩金额',width:20}]
 
  var  getReciveRate = (_item) => {
@@ -50,7 +50,7 @@ const cols = [
 	return aglrate
 }
 exports.middle = async (ctx, next) => {
-  let item = await model.Session.getById(ctx.query.token)
+  let item = await model.Session.getById({_id:ctx.query.token})
   let sessionData
   if(item){
       sessionData = Object.assign({},JSON.parse(item.data))

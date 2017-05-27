@@ -9,14 +9,14 @@ const cols = [
 {key:'cnum',name:'编号',width:20}
 ,{key:'name',name:'名字',width:20}
 ,{key:'address',name:'地址',width:20}
-,{key:'center_master',name:'设计中心',width:20}
+,{key:'center_num',name:'设计中心',width:20}
 ,{key:'order_type',name:'订单类型',width:20}
 ,{key:'product_type',name:'产品类型',width:20}
-,{key:'money',name:'订单金额',width:20}
+,{key:'contract_money',name:'订单金额',width:20}
 ,{key:'order_at',name:'下单时间',width:20}
-,{key:'supply',name:'供应商',width:20}
-,{key:'brand',name:'品牌',width:20},
-{key:'payType',name:'结算币种',width:20},
+,{key:'supplier_name',name:'供应商',width:20}
+,{key:'brand_num',name:'品牌',width:20},
+{key:'currency_num',name:'结算币种',width:20},
 {key:'AntRate',name:'预估汇率',width:20},
 {key:'SpayBatch',name:'实际应付供应商款项（原币）',width:20},
 {key:'payOriginMoney',name:'已付供应商款项（原币）',width:20},
@@ -27,7 +27,7 @@ const cols = [
 
 let  sum = dl=> dl.length > 1 ? dl.pop()+sum(dl) : dl[0]
 exports.middle = async (ctx, next) => {
-  let item = await model.Session.getById(ctx.query.token)
+  let item = await model.Session.getById({_id:ctx.query.token})
   let sessionData
   if(item){
       sessionData = Object.assign({},JSON.parse(item.data))

@@ -9,8 +9,8 @@ const cols = [
 {key:'cnum',name:'编号',width:20}
 ,{key:'name',name:'名字',width:20}
 ,{key:'address',name:'地址',width:20}
-,{key:'design_center',name:'设计中心',width:20}
-,{key:'bzman',name:'客户经理',width:20}
+,{key:'center_num',name:'设计中心',width:20}
+,{key:'customer_manager',name:'客户经理',width:20}
 ,{key:'designer',name:'设计师',width:20}
 ,{key:'itype',name:'款项内容',width:20}
 ,{key:'money',name:'收款金额',width:20}
@@ -18,7 +18,7 @@ const cols = [
 
 
 exports.middle = async (ctx, next) => {
-	let item = await model.Session.getById(ctx.query.token)
+	let item = await model.Session.getById({_id:ctx.query.token})
 	let sessionData
 	if(item){
 			sessionData = Object.assign({},JSON.parse(item.data))
@@ -46,7 +46,7 @@ exports.middle = async (ctx, next) => {
 			cusRes.list.map(d => {
 				if(d.cnum==v.customer_num){
 					cust=Object.assign(cust,
-						{name:d.name,address:d.address,customer_num:v.customer_num,design_center:d.design_center,bzman:d.bzman,designer:d.designer
+						{name:d.name,address:d.address,customer_num:v.customer_num,center_num:d.center_num,customer_manager:d.customer_manager,designer:d.designer
 						},v)
 					cusArr.push(cust);
 				}
