@@ -70,8 +70,8 @@ exports.middle = async (ctx, next) => {
     flt = {ownByUser:sessionData.user.cnum}
   }
   // let stocks = await model.Stock.fetch(flt,'-_id',10000*10000,0)  //filter,orderBy,limit,startPos
-    let recRes = await model.Receive.fetch(flt,10000*10000,0)
-    let cusRes = await model.Customer.fetch(flt,10000*10000,0)
+    let recRes = await model.Receive.fetch(flt,'-_id',10000*10000,0)
+    let cusRes = await model.Customer.fetch(flt,'-_id',10000*10000,0)
     let cusMap = {}
     cusRes.list.map(d=>cusMap[d.cnum]=d)
     recRes.list.map(d=>{
@@ -89,7 +89,6 @@ exports.middle = async (ctx, next) => {
         d.city_master = cus.city_master
         d.perItype = "首期业绩"
         d.pkind = " "
-        d.ag1money = "555555"
         d.rec_Rate = getReciveRate(d)
       })
   console.log('recRes.length',recRes.list.length)

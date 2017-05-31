@@ -47,56 +47,79 @@ exports.middle = async (ctx, next) => {
     flt = {ownByUser:sessionData.user.cnum}
   }
 
-  // let stocks = await model.Stock.fetch(flt,'-_id',10000*10000,0) //filter,orderBy,limit,startPos
 
-    let ordRes = await model.Purchase.fetch(
-        flt,
-        10000*10000,
-        0
-    )
+    //国外的结算数据
+    let ordRes = await model.Purchase.fetch(flt,'-_id',10000*10000,0)
     let _filter={cnum:{$in:ordRes.list.map(v=>v.customer_num)}}
-    let cusRes = await model.Customer.fetch(
-      _filter,
-      66666*66666,
-      0
-    )
-    _filter = {order_num:{$in:ordRes.list.map(d=>d.cnum)}}
-    let payRes = await model.Pay.fetch(
-       _filter,
-        10000*10000,
-        0
-    )
+    let cusRes = await model.Customer.fetch(_filter,'-_id',10000*10000,0)
+    _filter = {purchase_num:{$in:ordRes.list.map(d=>d.cnum)}}
+    let payRes = await model.Pay.fetch(_filter,'-_id',10000*10000,0)
     let cusArr=[]
     cusRes.list.map(d => {
         let cust={}
         ordRes.list.map(v=>{
-          if(d.cnum==v.customer_num){
-            cust=Object.assign(cust,{name:d.name,address:d.address,customer:d.cnum,center_num:d.center_num},v)
-            cusArr.push(cust);
-          }
+            if(d.cnum==v.customer_num){
+                cust=Object.assign(cust,{name:d.name,address:d.address,customer:d.cnum,center_num:d.center_num},v)
+                cusArr.push(cust);
+            }
         })
     })
     let payArr=[]
     let cmap = {'人民币':1,'欧元':7.5,'美元':6.5}
     payRes.list.map(p=>{
-      let payObj={}
-       cusArr.map(c=>{
-         if(c.cnum==p.purchase_num){
-           payObj=Object.assign({},c,
-             {
-              payType:p.itype,AntRate:cmap[p.itype],SpayBatch:p.origin_sum,
-              payBatch:p.batch,payOriginMoney:sum(p.batch.map(b=>parseFloat(b.origin_money))).toFixed(2),
-              payChinaMoney:sum(p.batch.map(b=>parseFloat(b.china_money))).toFixed(2),noPay:((p.origin_sum)- sum(p.batch.map(b=>parseFloat(b.origin_money)))).toFixed(2),
-              AntnoPay:cmap[p.itype]*((p.origin_sum)- sum(p.batch.map(b=>parseFloat(b.origin_money)))).toFixed(2),
-              profit:(parseFloat(c.money-p.origin_sum*cmap[p.itype])/c.money).toFixed(2)})
-              payArr.push(payObj)
-         }
-       })
+        let payObj={}
+        cusArr.map(c=>{
+            if(c.cnum==p.purchase_num){
+                payObj=Object.assign({},c,
+                    {
+                        order_type:p.itype,AntRate:cmap[p.itype],SpayBatch:p.purchase_money,
+                        payBatch:p.batch,payOriginMoney:sum(p.batch.map(b=>parseFloat(b.purchase_money))).toFixed(2),
+                        payChinaMoney:sum(p.batch.map(b=>parseFloat(b.china_money))).toFixed(2),noPay:((p.purchase_money)- sum(p.batch.map(b=>parseFloat(b.purchase_money)))).toFixed(2),
+                        AntnoPay:cmap[p.itype]*((p.purchase_money)- sum(p.batch.map(b=>parseFloat(b.purchase_money)))).toFixed(2),
+                        profit:(parseFloat(c.contract_money-p.purchase_money*cmap[p.itype])/c.contract_money).toFixed(2)})
+                payArr.push(payObj)
+            }
+        })
     })
-    for(let i=0;i<payArr.length;i++){
-      payArr[i].index=i
-    }
-   payRes.list=payArr
+
+    payRes.list=payArr
+    //国内的结算数据
+    let PurchasecnRes = await model.Purchasecn.fetch({},'-_id',10000*10000,0)
+    let _filtercn={cnum:{$in:PurchasecnRes.list.map(v=>v.customer_num)}}
+    let cuscnRes = await model.Customer.fetch(_filtercn,'-_id',10000*10000,0)
+    _filtercn = {purchase_num:{$in:PurchasecnRes.list.map(d=>d.cnum)}}
+    let paycnRes = await model.Pay.fetch(_filtercn,'-_id',10000*10000,0)
+    let cuscnArr=[]
+    cuscnRes.list.map(d => {
+        let cust={}
+        PurchasecnRes.list.map(v=>{
+            if(d.cnum==v.customer_num){
+                cust=Object.assign(cust,{name:d.name,address:d.address,customer:d.cnum,center_num:d.center_num},v)
+                cuscnArr.push(cust);
+            }
+        })
+    })
+    let paycnArr=[]
+    paycnRes.list.map(p=>{
+        let payObj={}
+        cuscnArr.map(c=>{
+            if(c.cnum==p.purchase_num){
+                payObj=Object.assign({},c,
+                    {
+                        order_type:p.itype,AntRate:cmap[p.itype],SpayBatch:p.purchase_money,
+                        payBatch:p.batch,payOriginMoney:sum(p.batch.map(b=>parseFloat(b.purchase_money))).toFixed(2),
+                        payChinaMoney:sum(p.batch.map(b=>parseFloat(b.china_money))).toFixed(2),noPay:((p.purchase_money)- sum(p.batch.map(b=>parseFloat(b.purchase_money)))).toFixed(2),
+                        AntnoPay:cmap[p.itype]*((p.purchase_money)- sum(p.batch.map(b=>parseFloat(b.purchase_money)))).toFixed(2),
+                        profit:(parseFloat(c.contract_money-p.purchase_money*cmap[p.itype])/c.contract_money).toFixed(2)})
+                paycnArr.push(payObj)
+            }
+        })
+    })
+    paycnRes.list=paycnArr
+    let arr =  paycnRes.list.concat(payRes.list);
+    console.log('arrr',arr)
+
+   payRes.list = arr
 
   console.log('payRes.length',payRes.list.length)
   let line = 1 ;
