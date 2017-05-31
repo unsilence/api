@@ -46,33 +46,58 @@ exports.middle = async (ctx, next) => {
 	}
 	// let stocks = await model.Stock.fetch(flt,'-_id',10000*10000,0)  //filter,orderBy,limit,startPos
 
-	let ordRes = await model.Order.fetch(flt,10000*10000,0)
-	let _filter={cnum:{$in:ordRes.list.map(v=>v.customer_num)}}
-	let cusRes = await model.Customer.fetch(_filter,10000*10000,0)
-	let cusArr=[]
-	cusRes.list.map(d => {
-			let cust={}
-			ordRes.list.map(v=>{
-				if(d.cnum==v.customer_num){
-					cust=Object.assign({},
-						{name:d.name,address:d.address,customer:d.cnum},v)
-					cusArr.push(cust);
-				}
-			})
-	})
-	for(let i=0;i<cusArr.length;i++){
-		cusArr[i].index=i
-	}
-	ordRes.list=cusArr
 
-	console.log('ordRes.length',ordRes.list.length)
+  //国内的
+    let purchasecnRes = await model.Purchasecn.fetch(flt,'-_id',10000*10000,0)
+    let _filter={cnum:{$in:purchasecnRes.list.map(v=>v.customer_num)}}
+	let cusRes = await model.Customer.fetch(_filter,'-_id',10000*10000,0)
+    let cusArr=[]
+    cusRes.list.map(d => {
+        let cust={}
+        purchasecnRes.list.map(v=>{
+          if(d.cnum==v.customer_num){
+            cust=Object.assign({},
+							{name:d.name,address:d.address,customer:d.cnum},v)
+            cusArr.push(cust);
+          }
+        })
+    })
+    for(let i=0;i<cusArr.length;i++){
+			cusArr[i].index=i
+		}
+   //国外的
+   let purchaseRes = await model.Purchase.fetch(flt,'-_id',10000*10000,0)
+   let _filter1={cnum:{$in:purchaseRes.list.map(v=>v.customer_num)}}
+   let cus1Res = await model.Customer.fetch(_filter1,'-_id',10000*10000,0)
+   let cusArr1=[]
+   cus1Res.list.map(d => {
+       let cust1={}
+       purchaseRes.list.map(v=>{
+         if(d.cnum==v.customer_num){
+           cust1=Object.assign({},
+            {name:d.name,address:d.address,customer:d.cnum},v)
+           cusArr1.push(cust1);
+         }
+       })
+   })
+   for(let i=0;i<cusArr1.length;i++){
+    cusArr1[i].index=i
+   }
+   purchaseRes.list = cusArr1
+
+   purchasecnRes.list=cusArr
+   let arr =  purchasecnRes.list.concat(purchaseRes.list);
+   console.log('arrr',arr)
+
+    purchaseRes.list=arr
+    console.log('purchaseRes======',purchaseRes)
 	let line = 1 ;
 	let col = 1;
 	for(let d of cols){
 			ws.column(col).setWidth(d.width);
 			ws.cell(line,col++).string(d.name).style(style)
 	}
-	for (let st of ordRes.list){
+	for (let st of purchaseRes.list){
 		ws.row(++line).setHeight(50);
 		col=1
 		for(let d of cols){
