@@ -60,11 +60,13 @@ const ACTIONS ={
     },
     async account(ctx,next){
         console.log("query",ctx.query)
-        let item = await model.Session.getById({_id:ctx.query.token})
-        if(item){
-            let sessionData = Object.assign({},JSON.parse(item.data))
-            sessionData.user.role = sessionData.user.role  ||'designer'
-            ctx.body = {status:'success',data:{item:sessionData.user}}
+        if(ctx.query.token !== 'undefined'){
+            let item = await model.Session.getById({_id:ctx.query.token})
+            if(item){
+                let sessionData = Object.assign({},JSON.parse(item.data))
+                sessionData.user.role = sessionData.user.role  ||'designer'
+                ctx.body = {status:'success',data:{item:sessionData.user}}
+            }
         }else{
             ctx.body = {status:'wrong',msg:'请使用/auth/login接口登录'}
         }

@@ -7,6 +7,14 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     type: String,
     default: ''
   }, //问题描述
+  origin: {
+    type: String,
+    default: ''
+  }, //问题来源
+  itype: {
+    type: String,
+    default: ''
+  },
   customer_num: {
     type: String,
     default: ''
