@@ -66,6 +66,13 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     type: String,
     default: ''
   }, //销售折扣
+  visit: {
+    type: String,
+    enum: [
+      '未回访', '送货回访', '阶段回访', '竣工回访'
+    ],
+    default: '未回访'
+  }, //客户回访
   products: {
     type: [
       {
