@@ -52,6 +52,7 @@ const collections = {
     getById: _customer_check,
     getByNum: _customer_check,
     fetch: _customer_check,
+    addItem: user =>[true, {}],
   },
   Pay: {
     getById: user =>[true, {}],

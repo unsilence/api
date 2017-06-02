@@ -30,6 +30,7 @@ const collections = {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
+    addItem: user =>[true, {}],
   },
   Pay: {
     getById: user =>[true, {}],
