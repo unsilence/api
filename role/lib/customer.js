@@ -56,6 +56,8 @@ const collections = {
   Purchase: {
     getById: user =>[true, {}],
     getByNum: user =>[true, {}],
+    updateById: user =>[true, {}],
+    updateByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
   Output: {

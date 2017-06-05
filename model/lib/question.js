@@ -18,7 +18,11 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
   customer_num: {
     type: String,
     default: ''
-  }, 
+  },
+  purchase_num: {
+    type: String,
+    default: ''
+  },
   status: {
     type: String,
     enum: [
