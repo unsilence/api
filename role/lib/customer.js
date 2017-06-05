@@ -36,7 +36,17 @@ const collections = {
     updateByNum: user =>[true, {}],
     fetch: user =>[true, {}],
     addItem: user =>[true, {}],
-  },    
+  },
+  Repair: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    deleteById: user =>[true, {}],
+    deleteByNum: user =>[true, {}],
+    updateById: user =>[true, {}],
+    updateByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+    addItem: user =>[true, {}],
+  },     
 
   Customer: {
     getById: _check,
