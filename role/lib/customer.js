@@ -49,19 +49,19 @@ const collections = {
   },     
 
   Customer: {
-    getById: _check,
-    getByNum: _check,
-    fetch: _check,
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
   },
   Purchase: {
-    getById: _customer_check,
-    getByNum: _customer_check,
-    fetch: _customer_check,
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
   },
   Output: {
-    getById: _customer_check,
-    getByNum: _customer_check,
-    fetch: _customer_check,
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
     addItem: user =>[true, {}],
   },
   Pay: {
