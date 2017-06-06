@@ -7,6 +7,14 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     type: String,
     default: ''
   },
+  contract_num: {
+    type: String,
+    default: ''
+  }, //保存 合同号
+  brand_num: {
+    type: String,
+    default: ''
+  }, //品牌
   itype: {
     type: String,
     default: ''
