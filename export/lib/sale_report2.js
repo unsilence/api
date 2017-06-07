@@ -88,6 +88,8 @@ exports.middle = async (ctx, next) => {
    purchaseRes.list = cusArr1
 
    purchasecnRes.list=cusArr
+    console.log('purchaseRes',purchaseRes)
+    console.log('purchasecnRes',purchasecnRes)
    let arr =  purchasecnRes.list.concat(purchaseRes.list);
    console.log('arrr',arr)
 
