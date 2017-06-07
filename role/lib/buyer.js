@@ -109,6 +109,11 @@ const collections = {
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
+  Repair: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+  },
 
   Currency: {
     getById: user =>[true, {}],

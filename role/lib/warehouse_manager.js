@@ -52,6 +52,11 @@ const collections = {
     getByNum: user =>[true, {}],
     fetch: user =>[true, {}],
   },
+  Repair: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+  },
 
   // 只能获取
   Purchase: {

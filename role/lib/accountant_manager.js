@@ -77,6 +77,11 @@ const collections = {
     fetch: user =>[true, {}],
     addItem: user =>[true, {}],
   },
+  Repair: {
+    getById: user =>[true, {}],
+    getByNum: user =>[true, {}],
+    fetch: user =>[true, {}],
+  },
 
   Input: {
     getById: user =>[true, {}],
