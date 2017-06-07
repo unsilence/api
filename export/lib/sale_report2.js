@@ -56,6 +56,7 @@ exports.middle = async (ctx, next) => {
         let cust={}
         purchasecnRes.list.map(v=>{
           if(d.cnum==v.customer_num){
+              var cust={}
             cust=Object.assign({},
 							{name:d.name,address:d.address,customer:d.cnum},v)
             cusArr.push(cust);
@@ -74,6 +75,7 @@ exports.middle = async (ctx, next) => {
        let cust1={}
        purchaseRes.list.map(v=>{
          if(d.cnum==v.customer_num){
+             var cust1={}
            cust1=Object.assign({},
             {name:d.name,address:d.address,customer:d.cnum},v)
            cusArr1.push(cust1);
@@ -90,6 +92,39 @@ exports.middle = async (ctx, next) => {
    console.log('arrr',arr)
 
     purchaseRes.list=arr
+	   //将国内国外的数据按照下单时间进行排序
+   function quickSort(arr,name,snum){
+          //如果数组<=1,则直接返回
+          if(arr.length<=1){return arr;}
+          var pivotIndex=Math.floor(arr.length/2);
+          //找基准，并把基准从原数组删除
+          var pivot=arr.splice(pivotIndex,1)[0];
+          var middleNum=pivot[name];
+          // 定义左右数组
+          var left=[];
+          var right=[];
+          //比基准小的放在left，比基准大的放在right
+          if(snum){
+              for(var i=0;i<arr.length;i++){
+                  if(arr[i][name]>middleNum){
+                  left.push(arr[i]);
+                  }else{
+                  right.push(arr[i]);
+                  }
+              }
+          }else{
+              for(var i=0;i<arr.length;i++){
+                  if(arr[i][name]<=middleNum){
+                  left.push(arr[i]);
+                  }else{
+                  right.push(arr[i]);
+                  }
+              }
+          }
+          //递归,返回所需数组
+          return quickSort(left,name,snum).concat([pivot],quickSort(right,name,snum));
+  }
+     purchaseRes.list = quickSort(arr,"order_at",true)
     console.log('purchaseRes======',purchaseRes)
 	let line = 1 ;
 	let col = 1;
