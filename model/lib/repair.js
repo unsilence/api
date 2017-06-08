@@ -15,10 +15,7 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
     type: String,
     default: ''
   }, //品牌
-  itype: {
-    type: String,
-    default: ''
-  },
+
   customer_num: {
     type: String,
     default: ''
@@ -29,7 +26,7 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
         product_num: {
           type: String,
           default: ''
-        }, //产品型号
+        }, //产品编号
         product_name: {
           type: String,
           default: ''
@@ -41,7 +38,11 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
         product_price: {
           type: String,
           default: ''
-        } //采购金额（原币）
+        }, //采购金额（原币）
+         itype: {
+              type: String,
+              default: ''
+          }
       }
     ],
     default: []

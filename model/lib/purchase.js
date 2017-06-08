@@ -101,11 +101,15 @@ var keys = exports.keys = Object.assign({}, Base.keys, {
         product_num: {
           type: String,
           default: ''
-        }, //产品型号
+        }, //产品编号
         product_name: {
           type: String,
           default: ''
         }, //产品名称
+        product_model: {
+              type: String,
+              default: ''
+        }, //产品型号
         product_quantity: {
           type: String,
           default: ''
